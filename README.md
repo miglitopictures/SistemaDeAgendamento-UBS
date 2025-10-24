@@ -33,10 +33,10 @@ participação ativa no desenvolvimento.
 **Desafio Selecionado:** Desafio 3 - Sistema de Agendamento de Consultas em Unidade Básica de Saúde
 
 ### Equipe
-- Glauglaushow
-- Lucas Carvalho
-- Lucas Valença
-- Miguel Duarte (líder técnico)
+- Glauberson Ribeiro de Siqueira
+- Lucas Moreira de Carvalho
+- Lucas Guilherme Pinheiro Valenca Barbosa
+- Miguel Duarte
 - Pablo Tamborini
 - Rodrigo Montenegro
 
