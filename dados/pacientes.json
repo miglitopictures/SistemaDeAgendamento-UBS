@@ -3,14 +3,14 @@
     "nome": "CARLOS SILVA",
     "cpf": "117.242.563-02",
     "data_de_nascimento": "01/04/2000",
-    "doencas_cronicas": "Diabetes e Hipertenção",
+    "doencas_cronicas": ["Diabétes", "Hipertensão"],
     "vacinas": "EM DIA"
   },
   {
     "nome": "ANA SOUZA",
     "cpf": "228.353.674-13",
     "data_de_nascimento": "15/09/1985",
-    "doencas_cronicas": "Nenhuma",
+    "doencas_cronicas": [],
     "vacinas": "ATRASADAS"
   }
 ]
