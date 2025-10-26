@@ -2,7 +2,7 @@
 Sistema CRUD de agendamento de consultas, para o projeto final da cadeira de Fundamentos da Programação.
 
 ## CRUDs
-Pacientes, Profissionais, Consultas, Unidades de Saúde(?).
+Pacientes, Profissionais, Consultas.
 
 ## Checklist
 ### Funcionalidades CRUD
@@ -34,9 +34,8 @@ participação ativa no desenvolvimento.
 
 ### Equipe
 - Glauberson Ribeiro de Siqueira
-- Lucas Moreira de Carvalho
 - Lucas Guilherme Pinheiro Valenca Barbosa
-- Miguel Duarte
+- Lucas Moreira de Carvalho
+- Miguel Duarte (Líder Tecnico)
 - Pablo Tamborini
 - Rodrigo Montenegro
-
