@@ -1,7 +1,7 @@
-from . import arquivos
+from .arquivos import *
 
-lista_pacientes = arquivos.carregar_dados(arquivos.PACIENTES_PATH)
-lista_profissionais = arquivos.carregar_dados(arquivos.PROFISSIONAIS_PATH)
+lista_pacientes = carregar_dados(PACIENTES_PATH)
+lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
 
 def criar_consulta(consultas):
     print("Agendar Consulta:")
@@ -31,7 +31,7 @@ def criar_consulta(consultas):
     }
 
     consultas.append(consulta)
-    arquivos.salvar_dados(consultas, arquivos.CONSULTAS_PATH)
+    salvar_dados(consultas, CONSULTAS_PATH)
     print("Consulta adicionada com sucesso!\n")
 
 def ler_consultas(consultas):
@@ -51,3 +51,6 @@ def atualizar_consulta():
 def deletar_consulta():
     ## 
     pass # delete essa linha ao começar seu trabalho
+
+consultas = carregar_dados(CONSULTAS_PATH)
+ler_consultas(consultas)
