@@ -45,7 +45,7 @@ def ler_consultas(consultas):
     print()
 
 def atualizar_consulta():
-    ## 
+    # Seu programa aqui! novas  
     pass # delete essa linha ao começar seu trabalho
 
 def deletar_consulta():
