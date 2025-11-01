@@ -30,9 +30,9 @@ def is_crm(crm: str) -> bool:
 
 
 
-def buscar_por_valor(valor, chave, dados: list):
+def buscar_por_valor(valor, chave, lista: list):
     '''Retorna o primeiro objeto dentro da lista, com o valor e a chave especificada no input.'''
-    for dado in dados:
-        if dado[chave] == valor:
-            return dado
+    for item in lista:
+        if item[chave] == valor:
+            return item
     return None
