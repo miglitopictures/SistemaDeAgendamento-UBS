@@ -1,27 +1,48 @@
 from .arquivos import *
+from .utils import is_cpf, is_crm, buscar_por_valor
 
 lista_pacientes = carregar_dados(PACIENTES_PATH)
 lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
 
-def criar_consulta(consultas):
+def criar_consulta(consultas: list):
     print("Agendar Consulta:")
     data = input("Data (DD/MM/AAAA): ")
-    horario = input("Horário: ")
-    cpf_paciente = input("CPF do Paciente: ")
-    nome_paciente = ""
-    for paciente in lista_pacientes:
-        if paciente["cpf"] == cpf_paciente:
+    horario = input("Horário (HH:MM): ")
+
+    while True:
+        cpf_paciente = input("CPF do Paciente: ") #
+
+        if not is_cpf(cpf_paciente):
+            print("CPF invalido ou vazio.")
+            continue
+
+
+        paciente = buscar_por_valor(cpf_paciente, "cpf", lista_pacientes)
+        if paciente:
             nome_paciente = paciente["nome"]
+            print(nome_paciente)
             break
-    crm_profissional = input("CRM do Profissional: ")
-    nome_profissional = ""
-    for profissional in lista_profissionais:
-        if profissional["crm"] == crm_profissional:
+        else:
+            print(f"Paciente {cpf_paciente} não cadastrado.")
+
+
+    while True:
+        crm_profissional = input("CRM do Profissional: ")
+
+        if not is_crm(crm_profissional):
+            print("CRM invalido ou vazio.")
+            continue
+
+        profissional = buscar_por_valor(crm_profissional, "crm", lista_profissionais)
+        if profissional:
             nome_profissional = profissional["nome"]
+            print(nome_profissional)
             break
+        else:
+            print(f"Profissional {crm_profissional} não cadastrado.")
 
     consulta = {
-        "id": len(consultas) + 1,
+        "id": max((consulta["id"] for consulta in consultas), default=0) + 1,
         "data": data,
         "horario": horario,
         "paciente": nome_paciente,
@@ -34,7 +55,7 @@ def criar_consulta(consultas):
     salvar_dados(consultas, CONSULTAS_PATH)
     print("Consulta adicionada com sucesso!\n")
 
-def ler_consultas(consultas):
+def ler_consultas(consultas: list):
     if not consultas:
         print("Nenhuma consulta cadastrada.\n")
         return
@@ -44,13 +65,80 @@ def ler_consultas(consultas):
         print(f"{consulta['id']} - {consulta['data']} {consulta['horario']} | Paciente: {consulta['paciente']} | Profissional: {consulta['profissional']}")
     print()
 
-def atualizar_consulta():
+def ler_uma_consulta(consultas):
     ## 
     pass # delete essa linha ao começar seu trabalho
 
-def deletar_consulta():
+def atualizar_consulta(consultas: list):
+    ler_consultas(consultas)
+
+    try:    
+        id_selecionada = int(input("Selecione uma consulta para atualizar: "))
+    except ValueError:
+        print("Id invalido, digite um valor numérico inteiro (1,2,3...).")
+        return
+    
+    consulta = buscar_por_valor(id_selecionada, "id", consultas)
+    if consulta:
+        print(f"Editando Consulta {id_selecionada}")
+
+        nova_data = input("Nova data: ")
+        if nova_data:
+            consulta["data"] = nova_data
+
+        novo_horario = input("Novo Horario: ")
+        if novo_horario:
+            consulta["horario"] = novo_horario
+        
+        while True:
+            novo_crm = input("CRM do novo profissinal: ")
+
+            if not novo_crm:
+                break
+            
+            if not is_crm(novo_crm):
+                print("CRM invalido.")
+                continue
+
+            profissional = buscar_por_valor(novo_crm, "crm", lista_profissionais)
+            if profissional:
+                consulta["crm_profissional"] = novo_crm
+                consulta["profissional"] = profissional["nome"]
+                print(profissional["nome"])
+                break
+            else:
+                print(f"Profissional {novo_crm} não cadastrado.")
+
+        while True:
+            novo_cpf = input("CPF do novo paciente: ")
+
+            if not novo_cpf:
+                break
+
+            if not is_cpf(novo_cpf):
+                print("CPF invalido ou vazio.")
+                continue
+
+            paciente = buscar_por_valor(novo_cpf, "cpf", lista_pacientes)
+            if paciente:
+                consulta["cpf_paciente"] = novo_cpf
+                consulta["paciente"] = paciente["nome"]
+                print(paciente["nome"])
+                break
+            else:
+                print(f"Paciente {novo_cpf} não cadastrado.")
+    
+        salvar_dados(consultas, CONSULTAS_PATH)
+        print("Consulta atualizada!")
+    else:
+        print("Id da consulta não encontrada")
+
+
+def deletar_consulta(consultas):
     ## 
     pass # delete essa linha ao começar seu trabalho
+
 
 consultas = carregar_dados(CONSULTAS_PATH)
-ler_consultas(consultas)
+# Teste aqui dua funcao
+# E utilize "python -m modulos.consultas" no terminal para rodar o arquivo.
