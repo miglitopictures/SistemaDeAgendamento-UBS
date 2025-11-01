@@ -18,14 +18,14 @@
     },
     {
         "nome": "José Carlos",
-        "cpf": "33333333333",
+        "cpf": "333.333.333-33",
         "nascimento": "10/01/1974",
         "convenio": "Bradesco",
         "status_vacinas": "EM DIA"
     },
     {
         "nome": "Ana Paula",
-        "cpf": "11111111111",
+        "cpf": "111.111.111-11",
         "nascimento": "02/08/1999",
         "convenio": "SulAmérica",
         "status_vacinas": "ATRASADAS"
