@@ -10,7 +10,7 @@ def criar_consulta(consultas: list):
     horario = input("Horário (HH:MM): ")
 
     while True:
-        cpf_paciente = input("CPF do Paciente: ") #
+        cpf_paciente = input("CPF do Paciente: ")
 
         if not is_cpf(cpf_paciente):
             print("CPF invalido ou vazio.")
