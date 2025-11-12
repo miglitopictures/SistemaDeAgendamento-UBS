@@ -70,15 +70,13 @@ def exibir_menu_pacientes():
         select = int(input("Selecione uma opção: "))
         match select:
             case 1:
-                modulos.pacientes.criar_paciente(lista_pacientes)
+                # modulos.pacientes.ler_pacientes(lista_pacientes)
+                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
+                pass
             case 2:
-                # modulos.pacientes.ler_paciente(lista_consultas)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.pacientes.criar_paciente(lista_pacientes)
             case 3:
-                # modulos.pacientes.ler_um_paciente(lista_consultas)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.pacientes.ler_um_paciente(lista_consultas)
             case 4:
                 # modulos.pacientes.deletar_paciente(lista_consultas)
                 print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
@@ -102,25 +100,15 @@ def exibir_menu_profissionais():
         select = int(input("Selecione uma opção: "))
         match select:
             case 1:
-                # modulos.profissionais.criar_profissional(lista_profissionais)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.profissionais.ler_profissionais(lista_profissionais)
             case 2:
-                # modulos.profissionais.ler_profissionais(lista_profissionais)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.profissionais.criar_profissional(lista_profissionais)
             case 3:
-                # modulos.profissionais.ler_um_profissional(lista_profissionais)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.profissionais.ler_um_profissional(lista_profissionais)
             case 4:
-                # modulos.profissionais.deletar_profissional(lista_profissionais)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.profissionais.deletar_profissional(lista_profissionais)
             case 5:
-                # modulos.profissionais.atualizar_profissional(lista_profissionais)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.profissionais.atualizar_profissional(lista_profissionais)
             case 6:
                 break
 

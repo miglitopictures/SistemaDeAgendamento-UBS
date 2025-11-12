@@ -59,7 +59,7 @@ def criar_paciente(pacientes):
     print(f"\n✅ Paciente {nome} adicionado com sucesso!")
 
 
-def ler_paciente(pacientes):
+def ler_um_paciente(pacientes):
     
     '''Busca e exibe os dados de um paciente pelo CPF.
     O parâmetro 'pacientes' deve ser uma lista de dicionários.
@@ -90,10 +90,7 @@ def ler_paciente(pacientes):
     else:
         print(f"\n❌ Paciente com CPF '{buscar_cpf_input}' não encontrado na base de dados.")
         return None 
-    
 
-lista_de_pacientes = carregar_dados(PACIENTES_PATH)
-ler_paciente(lista_de_pacientes)
 
 def atualizar_paciente():
     ## 

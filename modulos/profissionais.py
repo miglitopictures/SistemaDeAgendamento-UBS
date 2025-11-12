@@ -105,14 +105,14 @@ def criar_profissional(profissionais: list):
     profissionais.append(profissional)
 
     try:
-        salvar_dados(PROFISSIONAIS_PATH, profissionais)
+        salvar_dados(profissionais, PROFISSIONAIS_PATH)
         print(f"Profissional '{nome_profissional}' adicionado com sucesso!\n")
     except Exception as e:
         print("Erro ao salvar os dados:", e, "\n")
    
    
    
-def ler_profissional(profissionais: list):
+def ler_um_profissional(profissionais: list):
 	
    while True:
         
@@ -222,7 +222,7 @@ def atualizar_profissional(profissionais: list):
 
 
 
-def excluir_profissional(profissionais: list):
+def deletar_profissional(profissionais: list):
 
     while True:
         termo = input("Digite o CRM do profissional que deseja excluir: ").strip()
@@ -246,10 +246,12 @@ def excluir_profissional(profissionais: list):
         else:
             print("\nOperação cancelada.\n")
 
+        break
 
 
 
-def listar_profissionais(profissionais: list):
+
+def ler_profissionais(profissionais: list):
     if not profissionais:
         print("Nenhum profissional cadastrado ainda.\n")
         return
