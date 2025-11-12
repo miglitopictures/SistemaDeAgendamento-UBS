@@ -264,3 +264,5 @@ def listar_profissionais(profissionais: list):
         if p.get('especialidade'):
             print(f"Especialidades: {', '.join(p['especialidade'])}")
         print()
+
+# comentario teste
