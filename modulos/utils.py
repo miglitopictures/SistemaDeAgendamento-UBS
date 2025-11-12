@@ -17,7 +17,7 @@ def is_cpf(cpf: str) -> bool:
 
 
 def is_crm(crm: str) -> bool:
-    '''Verifica a formatacao CPF do string de entrada. (xxx.xxx.xxx-xx)'''
+    '''Verifica a formatacao CRM do string de entrada. (xxxxx/UF)'''
     partes = crm.split('/')
 
     if len(partes) != 2:
