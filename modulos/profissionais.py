@@ -245,7 +245,7 @@ def excluir_profissional(profissionais: list):
             print("\nProfissional removido com sucesso!\n")
         else:
             print("\nOperação cancelada.\n")
-
+		 break
 
 
 
