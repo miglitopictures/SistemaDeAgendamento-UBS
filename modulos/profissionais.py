@@ -116,13 +116,13 @@ def ler_profissional(profissionais: list):
 	
    while True:
         
-    termo = input("Digite o CPF ou CRM do profissional: ").strip()
+    termo = input("Digite o CRM do profissional: ").strip()
 	
     if not is_cpf(termo) and not is_crm(termo):
-        print("Erro: CPF ou CRM inválido ou vazio.\n")
+        print("Erro: CRM inválido ou vazio.\n")
         continue
 		
-    resultado = buscar_por_valor(profissionais, termo)
+    resultado = buscar_por_valor(termo, "crm", lista_profissionais)
 	
     if resultado:
         print("\nProfissional encontrado:\n")
@@ -143,13 +143,13 @@ def ler_profissional(profissionais: list):
 def atualizar_profissional(profissionais: list):
 
     while True:
-        termo = input("Digite o CPF ou CRM do profissional que deseja atualizar: ").strip()
+        termo = input("Digite o CRM do profissional que deseja atualizar: ").strip()
         
-        if not is_cpf(termo) and not is_crm(termo):
-            print("Erro: CPF ou CRM inválido ou vazio. Tente novamente.\n")
+        if not is_crm(termo):
+            print("Erro: CRM inválido ou vazio. Tente novamente.\n")
             continue
             
-        resultado = buscar_por_valor(profissionais, termo)
+        resultado = buscar_por_valor(termo, "crm", lista_profissionais)
         
         if not resultado:
             print(f"Nenhum profissional encontrado com '{termo}'.\n")
@@ -225,12 +225,12 @@ def atualizar_profissional(profissionais: list):
 def excluir_profissional(profissionais: list):
 
     while True:
-        termo = input("Digite o CPF ou CRM do profissional que deseja excluir: ").strip()
-        if not is_cpf(termo) and not is_crm(termo):
-            print("Erro: CPF ou CRM inválido ou vazio.\n")
+        termo = input("Digite o CRM do profissional que deseja excluir: ").strip()
+        if not is_crm(termo):
+            print("Erro: CRM inválido ou vazio.\n")
             continue
 
-        resultado = buscar_por_valor(profissionais, termo)
+        resultado = buscar_por_valor(termo, "crm", lista_profissionais)
 
         if not resultado:
             print(f"Nenhum profissional encontrado com '{termo}'. Tente novamente.\n")
