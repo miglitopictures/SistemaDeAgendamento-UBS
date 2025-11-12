@@ -1,3 +1,11 @@
+ESTADOS_BR = [
+        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
+        "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
+        "RS", "RO", "RR", "SC", "SP", "SE", "TO"
+    ]
+
+
+
 def is_cpf(cpf: str) -> bool:
     '''Verifica a formatacao CPF do string de entrada. (xxx.xxx.xxx-xx)'''
     digitos_cpf = cpf.strip().replace(".", "").replace("-", "")
@@ -7,11 +15,6 @@ def is_cpf(cpf: str) -> bool:
         return True
 
 
-ESTADOS_BR = [
-        "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
-        "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
-        "RS", "RO", "RR", "SC", "SP", "SE", "TO"
-    ]
 
 def is_crm(crm: str) -> bool:
     '''Verifica a formatacao CPF do string de entrada. (xxx.xxx.xxx-xx)'''
@@ -27,6 +30,30 @@ def is_crm(crm: str) -> bool:
         return True
     else:
         return False
+
+
+
+def is_rqe(rqe: str, crm: str) -> bool:
+    
+    partes = rqe.split('-')
+
+    if len(partes) != 2:
+        return False
+
+    parte_inicial = partes[0]
+    parte_final = partes[1]
+
+    quatro_primeiros_crm = crm.split('/')[0][:4]
+
+    if (
+        parte_inicial.isdigit()
+        and parte_final.isdigit()
+        and len(parte_inicial) == 4
+        and len(parte_final) == 3
+        and parte_inicial == quatro_primeiros_crm
+    ):
+        return True
+    return False
 
 
 
