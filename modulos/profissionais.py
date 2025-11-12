@@ -140,7 +140,6 @@ def ler_profissional(profissionais: list):
 
 
 
-
 def atualizar_profissional(profissionais: list):
 
     while True:
@@ -172,7 +171,7 @@ def atualizar_profissional(profissionais: list):
 
     while True:
         novo_crm = input(f"Novo CRM [{resultado['crm']}]: ").strip() or resultado['crm']
-        if not is_crm(crm):
+        if not is_crm(novo_crm):
             print("Erro: CRM inválido ou vazio.Tente novamente\n")
         else:
             print(f"Nome '{novo_crm}' registrado.\n")
@@ -187,7 +186,7 @@ def atualizar_profissional(profissionais: list):
             break 
             
         if not is_rqe(novo_rqe, novo_crm):
-            print("⚠️ Erro: RQE inválido ou incompatível com o CRM. Tente novamente\n")
+            print("Erro: RQE inválido ou incompatível com o CRM. Tente novamente\n")
             continue
             
         print(f"RQE '{novo_rqe}' registrado.\n")
