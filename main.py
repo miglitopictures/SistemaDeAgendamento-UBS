@@ -74,11 +74,11 @@ def exibir_menu_pacientes():
             case 2:
                 modulos.pacientes.criar_paciente(lista_pacientes)
             case 3:
-                modulos.pacientes.ler_um_paciente(lista_consultas)
+                modulos.pacientes.ler_um_paciente(lista_pacientes)
             case 4:
-                modulos.pacientes.deletar_paciente(lista_consultas)
+                modulos.pacientes.deletar_paciente(lista_pacientes)
             case 5:
-                modulos.pacientes.atualizar_paciente(lista_consultas)
+                modulos.pacientes.atualizar_paciente(lista_pacientes)
             case 6:
                 break
     

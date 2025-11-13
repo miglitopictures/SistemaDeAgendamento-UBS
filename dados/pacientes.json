@@ -3,45 +3,49 @@
         "nome": "CARLOS SILVA",
         "cpf": "117.242.563-02",
         "data_de_nascimento": "01/04/2000",
-        "doencas_cronicas": [
-            "Diabétes",
-            "Hipertensão"
-        ],
+        "convenio": "Bradesco",
         "vacinas": "EM DIA"
     },
     {
         "nome": "ANA SOUZA",
         "cpf": "228.353.674-13",
         "data_de_nascimento": "15/09/1985",
-        "doencas_cronicas": [],
+        "convenio": "Bradesco",
         "vacinas": "ATRASADAS"
     },
     {
         "nome": "José Carlos",
         "cpf": "333.333.333-33",
-        "nascimento": "10/01/1974",
+        "data_de_nascimento": "10/01/1974",
         "convenio": "Bradesco",
-        "status_vacinas": "EM DIA"
+        "vacinas": "EM DIA"
     },
     {
         "nome": "Ana Paula",
         "cpf": "111.111.111-11",
-        "nascimento": "02/08/1999",
+        "data_de_nascimento": "02/08/1999",
         "convenio": "SulAmérica",
-        "status_vacinas": "ATRASADAS"
+        "vacinas": "ATRASADAS"
     },
     {
         "nome": "Glauberson",
-        "cpf": "55555555555",
-        "nascimento": "05/11/1940",
+        "cpf": "555.555.555-55",
+        "data_de_nascimento": "05/11/1940",
         "convenio": "Bradesco",
-        "status_vacinas": "ATRASADAS"
+        "vacinas": "ATRASADAS"
     },
     {
         "nome": "glau",
-        "cpf": "00000000000",
-        "nascimento": "05/12/2000",
+        "cpf": "000.000.000-00",
+        "data_de_nascimento": "05/12/2000",
         "convenio": "bradesco",
-        "status_vacinas": "EM DIA"
+        "vacinas": "EM DIA"
+    },
+    {
+        "nome": "Lindinauva",
+        "cpf": "777.777.777-88",
+        "data_de_nascimento": "03/04/2004",
+        "convenio": "Bradesco",
+        "vacinas": "EM DIA"
     }
 ]
