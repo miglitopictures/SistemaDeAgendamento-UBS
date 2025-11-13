@@ -222,30 +222,21 @@ def atualizar_profissional(profissionais: list):
 
 
 
-def excluir_profissional(profissionais: list):
 
-    while True:
-        termo = input("Digite o CRM do profissional que deseja excluir: ").strip()
-        if not is_crm(termo):
-            print("Erro: CRM inválido ou vazio.\n")
-            continue
 
-        resultado = buscar_por_valor(termo, "crm", lista_profissionais)
-
-        if not resultado:
-            print(f"Nenhum profissional encontrado com '{termo}'. Tente novamente.\n")
-            continue
-
-        print(f"\nConfirma exclusão de {resultado['nome']} (CPF {resultado['cpf']})?")
-        confirmar = input("Digite 'SIM' para confirmar: ").strip().upper()
-
-        if confirmar == "SIM":
-            profissionais.remove(resultado)
-            salvar_dados(profissionais, PROFISSIONAIS_PATH)
-            print("\nProfissional removido com sucesso!\n")
-        else:
-            print("\nOperação cancelada.\n")
-
+    def excluir_profissional(profissionais: list):
+        PROFISSIONAIS_PATH(profissionais)
+    try: 
+        crm_profissional = int(input("Digite o CRM do profissional que deseja excluir: "))
+        for p in profissionais:
+            if p["crm"] == crm_profissional:
+                profissionais.remove(p)
+                salvar_dados(profissionais)
+                print(f"Profissional '{p['nome']}' removido com sucesso\n")
+                return
+        print("Profissional não encontrado.\n")
+    except ValueError: 
+        print(f"CRM inválido.\n")
 
 
 
