@@ -59,7 +59,7 @@ def criar_paciente(pacientes):
     print(f"\n✅ Paciente {nome} adicionado com sucesso!")
 
 
-def ler_paciente(pacientes):
+def ler_um_paciente(pacientes):
     
     '''Busca e exibe os dados de um paciente pelo CPF.
     O parâmetro 'pacientes' deve ser uma lista de dicionários.
@@ -90,10 +90,7 @@ def ler_paciente(pacientes):
     else:
         print(f"\n❌ Paciente com CPF '{buscar_cpf_input}' não encontrado na base de dados.")
         return None 
-    
 
-lista_de_pacientes = carregar_dados(PACIENTES_PATH)
-ler_paciente(lista_de_pacientes)
 
 def ler_pacientes(pacientes):
     if not pacientes:
@@ -104,23 +101,23 @@ def ler_pacientes(pacientes):
         print(f"CPF: {p['cpf']} | {p['nome']} - Nasc.: {p['data_de_nascimento']} - Vacinas: {p['vacinas']} - Convênio: {p['convenio']}")
     print()
 
-def ver_paciente(pacientes):
-    if not pacientes:
-        print("Nenhum paciente cadastrado.\n")
-        return
-    cpf_busca = input("Digite o CPF do paciente: ")
-    for p in pacientes:
-        if p["cpf"] == cpf_busca:
-            print("\n Detalhes do Paciente:")
-            print(f"Nome: {p['nome']}")
-            print(f"CPF: {p['cpf']}")
-            print(f"Data de nascimento: {p['data_de_nascimento']}")
-            print(f"Vacinas: {p['vacinas']}")
-            print(f"Convênio: {p['convenio']}\n")
-            return
-    print("Paciente não encontrado.\n")
+# def ver_paciente(pacientes):
+#     if not pacientes:
+#         print("Nenhum paciente cadastrado.\n")
+#         return
+#     cpf_busca = input("Digite o CPF do paciente: ")
+#     for p in pacientes:
+#         if p["cpf"] == cpf_busca:
+#             print("\n Detalhes do Paciente:")
+#             print(f"Nome: {p['nome']}")
+#             print(f"CPF: {p['cpf']}")
+#             print(f"Data de nascimento: {p['data_de_nascimento']}")
+#             print(f"Vacinas: {p['vacinas']}")
+#             print(f"Convênio: {p['convenio']}\n")
+#             return
+#     print("Paciente não encontrado.\n")
 
-def remover_paciente(pacientes):
+def deletar_paciente(pacientes):
     ler_pacientes(pacientes)
     if not pacientes:
         return
@@ -128,7 +125,7 @@ def remover_paciente(pacientes):
     for p in pacientes:
         if p["cpf"] == cpf_busca:
             pacientes.remove(p)
-            salvar_dados(pacientes)
+            salvar_dados(pacientes, PACIENTES_PATH)
             print(f"Paciente '{p['nome']}' removido com sucesso!\n")
             return
     print("Paciente não encontrado.\n")
@@ -147,7 +144,7 @@ def atualizar_paciente(pacientes):
             p["data_de_nascimento"] = input("Nova data de nascimento: ") or p["data_de_nascimento"]
             p["vacinas"] = input("Novas vacinas: ") or p["vacinas"]
             p["convenio"] = input("Novo convênio: ") or p["convenio"]
-            salvar_dados(pacientes)
+            salvar_dados(pacientes, PACIENTES_PATH)
             print("Paciente atualizado com sucesso!\n")
             return
     print("Paciente não encontrado.\n")
