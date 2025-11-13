@@ -1,7 +1,3 @@
-# MODULO PROFISSIONAIS
-import json
-import os
-
 from .arquivos import *
 from .utils import is_cpf, is_crm, is_rqe, buscar_por_valor
 
@@ -221,8 +217,8 @@ def atualizar_profissional(profissionais: list):
 
 
 
-    def excluir_profissional(profissionais: list):
-        ler_profissionais(profissionais)
+def deletar_profissional(profissionais: list):
+    ler_profissionais(profissionais)
     try: 
         crm_profissional = int(input("Digite o CRM do profissional que deseja excluir: "))
         for p in profissionais:

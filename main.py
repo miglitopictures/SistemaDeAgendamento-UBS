@@ -70,21 +70,15 @@ def exibir_menu_pacientes():
         select = int(input("Selecione uma opção: "))
         match select:
             case 1:
-                # modulos.pacientes.ler_pacientes(lista_pacientes)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.pacientes.ler_pacientes(lista_pacientes)
             case 2:
                 modulos.pacientes.criar_paciente(lista_pacientes)
             case 3:
                 modulos.pacientes.ler_um_paciente(lista_consultas)
             case 4:
-                # modulos.pacientes.deletar_paciente(lista_consultas)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.pacientes.deletar_paciente(lista_consultas)
             case 5:
-                # modulos.pacientes.deletar_paciente(lista_consultas)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
+                modulos.pacientes.atualizar_paciente(lista_consultas)
             case 6:
                 break
     
