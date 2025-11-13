@@ -16,8 +16,8 @@ def criar_consulta(consultas: list):
             print("CPF invalido ou vazio.")
             continue
 
-
         paciente = buscar_por_valor(cpf_paciente, "cpf", lista_pacientes)
+
         if paciente:
             nome_paciente = paciente["nome"]
             print(nome_paciente)
