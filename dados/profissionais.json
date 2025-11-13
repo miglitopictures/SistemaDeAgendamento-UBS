@@ -18,14 +18,5 @@
             "Clinica Geral",
             "Endocrinologia"
         ]
-    },
-    {
-        "nome": "Miguel Duarte",
-        "cpf": "111.111.111-23",
-        "crm": "123456/PE",
-        "rqe": "1234-999",
-        "especialidade": [
-            "Gastronomia"
-        ]
     }
 ]

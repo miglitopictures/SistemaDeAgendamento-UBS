@@ -175,7 +175,7 @@ def atualizar_profissional(profissionais: list):
 
     while True:
         
-        novo_rqe = input(f"Novo RQE [{resultado.get('rqe', '')}]: ").strip() or resultado.get('rqe', '')
+        novo_rqe = input(f"Novo RQE [{resultado.get('rqe')}]: ").strip() or resultado.get('rqe')
         
         if not novo_rqe:
             print("RQE removido (ou mantido vazio).\n")
@@ -194,7 +194,7 @@ def atualizar_profissional(profissionais: list):
         novas_esp = input(
         f"Novas especialidades [separadas por vírgula]:\n"
         f"---==[Caso não possua, digite ENTER]==---\n"
-        f"[{', '.join(resultado.get('especialidade', []))}]: ").strip()
+        f"[{', '.join(resultado.get('especialidade', []))}]: ").strip() or resultado.get('especialidade')
 
         if novas_esp:
             lista_especialidades = [e.strip() for e in novas_esp.split(",") if e.strip()]
@@ -220,7 +220,7 @@ def atualizar_profissional(profissionais: list):
 def deletar_profissional(profissionais: list):
     ler_profissionais(profissionais)
     try: 
-        crm_profissional = int(input("Digite o CRM do profissional que deseja excluir: "))
+        crm_profissional = input("Digite o CRM do profissional que deseja excluir: ")
         for p in profissionais:
             if p["crm"] == crm_profissional:
                 profissionais.remove(p)
