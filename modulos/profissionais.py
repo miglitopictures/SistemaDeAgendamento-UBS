@@ -145,7 +145,8 @@ def atualizar_profissional(profissionais: list):
             print("Erro: CRM inválido ou vazio. Tente novamente.\n")
             continue
             
-        resultado = buscar_por_valor(termo, "crm", lista_profissionais)
+        #resultado = buscar_por_valor(termo, "crm", lista_profissionais)
+        profisisonal_encontrado = False
         for profissional in profissionais:
             if profissional["crm"] == termo:
                 print(f"\nEditando dados de {profissional['nome']}\n")
@@ -207,8 +208,9 @@ def atualizar_profissional(profissionais: list):
 
                 salvar_dados(profissionais, PROFISSIONAIS_PATH)
                 print("\nDados atualizados com sucesso!\n")
+                profisisonal_encontrado = True
 
-        if not resultado:
+        if not profisisonal_encontrado:
             print(f"Nenhum profissional encontrado com '{termo}'.\n")
             continue
         break
