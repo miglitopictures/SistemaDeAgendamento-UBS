@@ -1,8 +1,6 @@
 from .arquivos import *
 from .utils import is_cpf, is_crm, is_rqe, buscar_por_valor
 
-lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
-
 def criar_profissional(profissionais: list):
 
     print("|:::::: Cadastro de novo(a) profissional ::::::|")    
@@ -118,7 +116,7 @@ def ler_um_profissional(profissionais: list):
         print("Erro: CRM inválido ou vazio.\n")
         continue
 		
-    resultado = buscar_por_valor(termo, "crm", lista_profissionais)
+    resultado = buscar_por_valor(termo, "crm", profissionais)
 	
     if resultado:
         print("\nProfissional encontrado:\n")
@@ -144,8 +142,7 @@ def atualizar_profissional(profissionais: list):
         if not is_crm(termo):
             print("Erro: CRM inválido ou vazio. Tente novamente.\n")
             continue
-            
-        #resultado = buscar_por_valor(termo, "crm", lista_profissionais)
+
         profisisonal_encontrado = False
         for profissional in profissionais:
             if profissional["crm"] == termo:

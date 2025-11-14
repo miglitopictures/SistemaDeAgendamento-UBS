@@ -9,5 +9,28 @@
             "Endocrinologia"
         ],
         "rque": ""
+    },
+    {
+        "nome": "SANDRA CRISTINA MOTTA",
+        "cpf": "984.555.434-09",
+        "crm": "874342/PR",
+        "rqe": null,
+        "especialidade": []
+    },
+    {
+        "nome": "VICTORIA FALCAO",
+        "cpf": "449.543.111-09",
+        "crm": "888723/PE",
+        "rqe": "8887-653",
+        "especialidade": [
+            "Psiquiatria"
+        ]
+    },
+    {
+        "nome": "MIGUEL \u0001KATHLYN GIACOMINNI",
+        "cpf": "123.123.123-23",
+        "crm": "234567/PE",
+        "rqe": null,
+        "especialidade": []
     }
 ]

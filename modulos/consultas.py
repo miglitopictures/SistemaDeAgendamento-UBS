@@ -1,10 +1,9 @@
 from .arquivos import *
 from .utils import is_cpf, is_crm, buscar_por_valor
 
-lista_pacientes = carregar_dados(PACIENTES_PATH)
-lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
-
 def criar_consulta(consultas: list):
+    lista_pacientes = carregar_dados(PACIENTES_PATH)
+    lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
     print("Agendar Consulta:")
     data = input("Data (DD/MM/AAAA): ")
     horario = input("Horário (HH:MM): ")
@@ -70,6 +69,8 @@ def ler_uma_consulta(consultas):
     pass # delete essa linha ao começar seu trabalho
 
 def atualizar_consulta(consultas: list):
+    lista_pacientes = carregar_dados(PACIENTES_PATH)
+    lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
     ler_consultas(consultas)
 
     try:    
