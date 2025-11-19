@@ -65,9 +65,27 @@ def ler_consultas(consultas: list):
         print(f"{consulta['id']} - {consulta['data']} {consulta['horario']} | Paciente: {consulta['paciente']} | Profissional: {consulta['profissional']}")
     print()
 
-def ler_uma_consulta(consultas):
-    ## 
-    pass # delete essa linha ao começar seu trabalho
+def ler_uma_consulta(consultas: list):
+    ler_consultas(consultas)
+
+    try:
+        id_selecionada = int(input("Selecione o ID de uma consulta para ver os detalhes: "))
+    except ValueError:
+        print("Id inválido. Digite um valor numérico inteiro.")
+        return
+
+    consulta = buscar_por_valor(id_selecionada, "id", consultas)
+
+    if consulta:
+        print("\nDetalhes da Consulta:")
+        print(f"  ID: {consulta['id']}")
+        print(f"  Data: {consulta['data']}")
+        print(f"  Horário: {consulta['horario']}")
+        print(f"  Paciente: {consulta['paciente']} (CPF: {consulta['cpf_paciente']})")
+        print(f"  Profissional: {consulta['profissional']} (CRM: {consulta['crm_profissional']})")
+        print()
+    else:
+        print(f"Consulta com ID {id_selecionada} não encontrada.\n")
 
 def atualizar_consulta(consultas: list):
     ler_consultas(consultas)
@@ -134,11 +152,24 @@ def atualizar_consulta(consultas: list):
         print("Id da consulta não encontrada")
 
 
-def deletar_consulta(consultas):
-    ## 
-    pass # delete essa linha ao começar seu trabalho
+def deletar_consulta(consultas: list):
+    ler_consultas(consultas)
 
+    try:
+        id_selecionada = int(input("Selecione o ID da consulta para DELETAR: "))
+    except ValueError:
+        print("Id inválido. Digite um valor numérico inteiro.")
+        return
 
-consultas = carregar_dados(CONSULTAS_PATH)
-# Teste aqui dua funcao
-# E utilize "python -m modulos.consultas" no terminal para rodar o arquivo.
+    indice_para_deletar = -1
+    for i, consulta in enumerate(consultas):
+        if consulta["id"] == id_selecionada:
+            indice_para_deletar = i
+            break
+
+    if indice_para_deletar != -1:
+        consulta_removida = consultas.pop(indice_para_deletar)
+        salvar_dados(consultas, CONSULTAS_PATH)
+        print(f" Consulta ID {id_selecionada} ({consulta_removida['paciente']} em {consulta_removida['data']}) deletada com sucesso!\n")
+    else:
+        print(f" Erro: Consulta com ID {id_selecionada} não encontrada.\n")
