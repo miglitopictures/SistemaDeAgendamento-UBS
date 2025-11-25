@@ -1,6 +1,4 @@
 from modulos.arquivos import *
-# from modulos.utils import print_header, print_list
-# colocar futuramente essas funcoes em utils
 import modulos.consultas, modulos.pacientes, modulos.profissionais
 
 lista_consultas = carregar_dados(CONSULTAS_PATH)
@@ -15,7 +13,7 @@ def exibir_menu():
         print_header("AGENDAMENTO DE CONSULTAS UBS")
         print_list(["Portal de Consultas",
                     "Portal de Pacientes",
-                    "Portal de Profissionai",
+                    "Portal de Profissionais",
                     "Sair"])
         select = int(input("Selecione uma opção: "))
 
