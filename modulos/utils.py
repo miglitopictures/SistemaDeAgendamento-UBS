@@ -33,8 +33,9 @@ def is_crm(crm: str) -> bool:
     else:
         return False
 
-def is_date(date: str) -> bool:
 
+def is_date(date: str) -> bool:
+    '''Verifica a formatacao de data do string de entrada. (DD/MM/AAAA)'''
     partes = date.split('/')
 
     if len(partes) != 3:

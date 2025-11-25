@@ -124,12 +124,53 @@ def atualizar_paciente(pacientes):
     for p in pacientes:
         if p["cpf"] == cpf_busca:
             print(f"Editando: {p['nome']} (CPF: {p['cpf']})")
+
             p["nome"] = input("Novo nome: ") or p["nome"]
-            novo_cpf = input("Novo CPF (enter para manter): ") or p["cpf"]
-            p["cpf"] = novo_cpf
-            p["data_de_nascimento"] = input("Nova data de nascimento: ") or p["data_de_nascimento"]
-            p["vacinas"] = input("Novas vacinas: ") or p["vacinas"]
+            
+            while True:
+                novo_cpf = input("Novo CPF (enter para manter): ")
+
+                if not novo_cpf:
+                    break
+
+                if not is_cpf(novo_cpf):
+                    print("⚠️ CPF invalido.")
+                    continue
+                
+                p["cpf"] = novo_cpf
+                break
+
+            while True:
+                nova_data_de_nascimento = input("Nova data de nascimento: ")
+
+                if not nova_data_de_nascimento:
+                    break
+
+                if not is_date(nova_data_de_nascimento):
+                    print("⚠️ Data invalida.")
+                    continue
+                
+                p["data_de_nascimento"] = nova_data_de_nascimento
+                break
+
+        
+            while True: 
+                novas_vacinas = input('As vacinas estão em dia? (Sim/Não): ').strip().lower()
+
+                if not novas_vacinas:
+                    break
+                if novas_vacinas in ('sim', 's'):
+                    novo_status_vacina = 'EM DIA'
+                elif novas_vacinas in ('não', 'nao' , 'n'):
+                    novo_status_vacina = 'ATRASADAS'
+                else:
+                    print('⚠️ Resposta inválida para Vacinas. Digite Sim ou Não.')
+                    continue
+                p["vacinas"] = novo_status_vacina
+                break
+
             p["convenio"] = input("Novo convênio: ") or p["convenio"]
+
             salvar_dados(pacientes, PACIENTES_PATH)
             print("Paciente atualizado com sucesso!\n")
             return

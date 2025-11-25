@@ -1,6 +1,7 @@
 from .arquivos import *
 from .utils import is_cpf, is_crm, is_rqe, buscar_por_valor
 
+
 def criar_profissional(profissionais: list):
 
     print("|:::::: Cadastro de novo(a) profissional ::::::|")    
@@ -211,8 +212,6 @@ def atualizar_profissional(profissionais: list):
             continue
         break
 
-
-    
 
 
 

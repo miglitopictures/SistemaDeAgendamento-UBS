@@ -55,7 +55,6 @@ def criar_consulta(consultas: list):
 
         break
 
-
     consulta = {
         "id": max((consulta["id"] for consulta in consultas), default=0) + 1,
         "data": data,
@@ -70,6 +69,7 @@ def criar_consulta(consultas: list):
     salvar_dados(consultas, CONSULTAS_PATH)
     print("Consulta adicionada com sucesso!\n")
 
+
 def ler_consultas(consultas: list):
     if not consultas:
         print("ℹ️ Nenhuma consulta cadastrada.\n")
@@ -79,6 +79,7 @@ def ler_consultas(consultas: list):
     for consulta in consultas:
         print(f"{consulta['id']} - {consulta['data']} {consulta['horario']} | Paciente: {consulta['paciente']} | Profissional: {consulta['profissional']}")
     print()
+
 
 def ler_uma_consulta(consultas: list):
     ler_consultas(consultas)
@@ -102,6 +103,7 @@ def ler_uma_consulta(consultas: list):
     else:
         print(f"ℹ️ Consulta com ID {id_selecionada} não encontrada.\n")
 
+
 def atualizar_consulta(consultas: list):
     lista_pacientes = carregar_dados(PACIENTES_PATH)
     lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
@@ -117,13 +119,31 @@ def atualizar_consulta(consultas: list):
     if consulta:
         print(f"Editando Consulta {id_selecionada}")
 
-        nova_data = input("Nova data: ")
-        if nova_data:
-            consulta["data"] = nova_data
+        while True:
+            nova_data = input("Nova data: ")
+            
+            if not nova_data:
+                break
 
-        novo_horario = input("Novo Horario: ")
-        if novo_horario:
+            if not is_date(nova_data):
+                print("⚠️ Data invalida.")
+                continue
+
+            consulta["data"] = nova_data
+            break
+
+        while True:
+            novo_horario = input("Novo Horario: ")
+
+            if not novo_horario:
+                break
+
+            if not is_time(novo_horario):
+                print("⚠️ Horario invalido.")
+                continue
+
             consulta["horario"] = novo_horario
+            break
         
         while True:
             novo_crm = input("CRM do novo profissinal: ")
