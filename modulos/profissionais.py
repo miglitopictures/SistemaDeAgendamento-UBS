@@ -1,7 +1,6 @@
 from .arquivos import *
 from .utils import is_cpf, is_crm, is_rqe, buscar_por_valor
 
-lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
 
 def criar_profissional(profissionais: list):
 
@@ -118,7 +117,7 @@ def ler_um_profissional(profissionais: list):
         print("Erro: CRM inválido ou vazio.\n")
         continue
 		
-    resultado = buscar_por_valor(termo, "crm", lista_profissionais)
+    resultado = buscar_por_valor(termo, "crm", profissionais)
 	
     if resultado:
         print("\nProfissional encontrado:\n")
@@ -144,80 +143,80 @@ def atualizar_profissional(profissionais: list):
         if not is_crm(termo):
             print("Erro: CRM inválido ou vazio. Tente novamente.\n")
             continue
-            
-        resultado = buscar_por_valor(termo, "crm", lista_profissionais)
-        
-        if not resultado:
+
+        profisisonal_encontrado = False
+        for profissional in profissionais:
+            if profissional["crm"] == termo:
+                print(f"\nEditando dados de {profissional['nome']}\n")
+
+                while True: 
+
+                    novo_nome = input(f"Novo nome [{profissional['nome']}]: ").strip() or profissional['nome']
+                    if not novo_nome:
+                        print("Nome não pode ser vazio.\n")
+                        continue
+                    else:
+                        print(f"Nome '{novo_nome}' registrado.\n")
+                        break   
+
+                while True:
+                    novo_crm = input(f"Novo CRM [{profissional['crm']}]: ").strip() or profissional['crm']
+                    if not is_crm(novo_crm):
+                        print("Erro: CRM inválido ou vazio.Tente novamente\n")
+                    else:
+                        print(f"Nome '{novo_crm}' registrado.\n")
+                        break   
+
+                while True:
+                    
+                    novo_rqe = input(f"Novo RQE [{profissional.get('rqe')}]: ").strip()
+                    
+                    if not novo_rqe:
+                        print("RQE removido (ou mantido vazio).\n")
+                        break 
+                        
+                    if not is_rqe(novo_rqe, novo_crm):
+                        print("Erro: RQE inválido ou incompatível com o CRM. Tente novamente\n")
+                        continue
+                        
+                    print(f"RQE '{novo_rqe}' registrado.\n")
+                    break
+                          
+                while True:
+                    
+                    novas_esp = input(
+                    f"Novas especialidades [separadas por vírgula]:\n"
+                    f"---==[Caso não possua, digite ENTER]==---\n"
+                    f"[{', '.join(profissional.get('especialidade', []))}]: ").strip()
+
+                    if novas_esp:
+                        lista_especialidades = [e.strip() for e in novas_esp.split(",") if e.strip()]
+                        print(f"Especialidades registradas: {lista_especialidades}\n")
+                    
+                    else:
+                        lista_especialidades = profissional.get('especialidade', [])
+                        print("Nenhuma especialidade registrada.\n")
+                    break
+
+                profissional["nome"] = novo_nome
+                profissional["crm"] = novo_crm
+                profissional["rqe"] = novo_rqe
+                profissional["especialidade"] = lista_especialidades
+
+                salvar_dados(profissionais, PROFISSIONAIS_PATH)
+                print("\nDados atualizados com sucesso!\n")
+                profisisonal_encontrado = True
+
+        if not profisisonal_encontrado:
             print(f"Nenhum profissional encontrado com '{termo}'.\n")
             continue
         break
 
 
-    print(f"\nEditando dados de {resultado['nome']}\n")
-
-    while True: 
-
-        novo_nome = input(f"Novo nome [{resultado['nome']}]: ").strip() or resultado['nome']
-        if not novo_nome:
-            print("Nome não pode ser vazio.\n")
-            continue
-        else:
-            print(f"Nome '{novo_nome}' registrado.\n")
-            break   
-
-    while True:
-        novo_crm = input(f"Novo CRM [{resultado['crm']}]: ").strip() or resultado['crm']
-        if not is_crm(novo_crm):
-            print("Erro: CRM inválido ou vazio.Tente novamente\n")
-        else:
-            print(f"Nome '{novo_crm}' registrado.\n")
-            break   
-
-    while True:
-        
-        novo_rqe = input(f"Novo RQE [{resultado.get('rqe')}]: ").strip() or resultado.get('rqe')
-        
-        if not novo_rqe:
-            print("RQE removido (ou mantido vazio).\n")
-            break 
-            
-        if not is_rqe(novo_rqe, novo_crm):
-            print("Erro: RQE inválido ou incompatível com o CRM. Tente novamente\n")
-            continue
-            
-        print(f"RQE '{novo_rqe}' registrado.\n")
-        break
-        
-        
-    while True:
-        
-        novas_esp = input(
-        f"Novas especialidades [separadas por vírgula]:\n"
-        f"---==[Caso não possua, digite ENTER]==---\n"
-        f"[{', '.join(resultado.get('especialidade', []))}]: ").strip() or resultado.get('especialidade')
-
-        if novas_esp:
-            lista_especialidades = [e.strip() for e in novas_esp.split(",") if e.strip()]
-            print(f"Especialidades registradas: {lista_especialidades}\n")
-        
-        else:
-            lista_especialidades = resultado.get('especialidade', [])
-            print("Nenhuma especialidade registrada.\n")
-        break
-
-    resultado.update({
-        "nome": novo_nome,
-        "crm": novo_crm,
-        "rqe": novo_rqe,
-        "especialidade": lista_especialidades
-    })
-
-    salvar_dados(profissionais, PROFISSIONAIS_PATH)
-    print("\nDados atualizados com sucesso!\n")
-
 
 
 def deletar_profissional(profissionais: list):
+    
     ler_profissionais(profissionais)
     try: 
         crm_profissional = input("Digite o CRM do profissional que deseja excluir: ")

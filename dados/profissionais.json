@@ -1,22 +1,44 @@
 [
     {
-        "nome": "SANDRA GARCIA FONSECA",
-        "cpf": "228.353.674-13",
-        "crm": "029382/PE",
-        "rqe": "23843",
-        "especialidade": [
-            "Cardiologia",
-            "Clinica Geral"
-        ]
-    },
-    {
-        "nome": "GUILHERME PEDRO TAMBORINI",
+        "nome": "GUILHERME PABLO TAMBORINI",
         "cpf": "168.113.276-55",
         "crm": "544785/PE",
-        "rqe": "82454",
+        "rqe": null,
         "especialidade": [
             "Clinica Geral",
             "Endocrinologia"
+        ]
+    },
+    {
+        "nome": "SANDRA CRISTINA MOTTA",
+        "cpf": "984.555.434-09",
+        "crm": "874342/PR",
+        "rqe": null,
+        "especialidade": []
+    },
+    {
+        "nome": "VICTORIA FALCAO",
+        "cpf": "449.543.111-09",
+        "crm": "888723/PE",
+        "rqe": "8887-653",
+        "especialidade": [
+            "Psiquiatria"
+        ]
+    },
+    {
+        "nome": "MIGUEL KATHLYN GIACOMINNI",
+        "cpf": "123.123.123-23",
+        "crm": "234567/PE",
+        "rqe": null,
+        "especialidade": []
+    },
+    {
+        "nome": "Vics Bics Nics",
+        "cpf": "123.123.123-65",
+        "crm": "000111/PR",
+        "rqe": "0001-666",
+        "especialidade": [
+            "Anestesia"
         ]
     }
 ]
