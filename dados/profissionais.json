@@ -31,5 +31,14 @@
         "crm": "234567/PE",
         "rqe": null,
         "especialidade": []
+    },
+    {
+        "nome": "Vics Bics Nics",
+        "cpf": "123.123.123-65",
+        "crm": "000111/PR",
+        "rqe": "0001-666",
+        "especialidade": [
+            "Anestesia"
+        ]
     }
 ]

@@ -8,10 +8,11 @@ ESTADOS_BR = [
 
 def is_cpf(cpf: str) -> bool:
     '''Verifica a formatacao CPF do string de entrada. (xxx.xxx.xxx-xx)'''
-    if cpf[3] != "." or cpf[7] != "." or cpf[11] != "-":
+
+    if len(cpf) != 14:
         return False
     digitos_cpf = cpf.strip().replace(".", "").replace("-", "")
-    if len(digitos_cpf) != 11 or not digitos_cpf.isdigit():
+    if not digitos_cpf.isdigit():
         return False
     else:
         return True

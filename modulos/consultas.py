@@ -49,7 +49,7 @@ def criar_consulta(consultas: list):
 
     while True:
         horario = input("Horário (HH:MM): ")
-        if not is_time(data):
+        if not is_time(horario):
             print("⚠️ Horário invalido ou vazio.")
             continue
 
