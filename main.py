@@ -1,5 +1,5 @@
-from modulos.arquivos import *
 import modulos.consultas, modulos.pacientes, modulos.profissionais
+from modulos.arquivos import carregar_dados, CONSULTAS_PATH, PACIENTES_PATH, PROFISSIONAIS_PATH
 
 lista_consultas = carregar_dados(CONSULTAS_PATH)
 lista_pacientes = carregar_dados(PACIENTES_PATH)
@@ -15,18 +15,22 @@ def exibir_menu():
                     "Portal de Pacientes",
                     "Portal de Profissionais",
                     "Sair"])
-        select = int(input("Selecione uma opção: "))
+        try:
+            select = int(input("Selecione uma opção: "))
+            match select:
+                case 1:
+                    exibir_menu_consultas()
+                case 2:
+                    exibir_menu_pacientes()
+                case 3:
+                    exibir_menu_profissionais()
+                case 4:
+                    print("\n\n- Obrigado!\n\n")
+                    break
+        except ValueError:
+            print("Opção inválida")
 
-        match select:
-            case 1:
-                exibir_menu_consultas()
-            case 2:
-                exibir_menu_pacientes()
-            case 3:
-                exibir_menu_profissionais()
-            case 4:
-                print("\n\n- Obrigado!\n\n")
-                break
+        
 
 def exibir_menu_consultas():
     while True:
@@ -37,24 +41,24 @@ def exibir_menu_consultas():
                     "Cancelar Consulta",
                     "Atualizar Consulta",
                     "Voltar"])
-        select = int(input("Selecione uma opção: "))
-        match select:
-            case 1:
-                modulos.consultas.criar_consulta(lista_consultas)
-            case 2:
-                modulos.consultas.ler_consultas(lista_consultas)
-            case 3:
-                # modulos.consultas.ler_uma_consulta(lista_consultas)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
-            case 4:
-                # modulos.consultas.deletar_consulta(lista_consultas)
-                print("!!!!ihh, FALTA IMPLEMENTAR!!!!")
-                pass
-            case 5:
-                modulos.consultas.atualizar_consulta(lista_consultas)
-            case 6:
-                break
+        try:
+            select = int(input("Selecione uma opção: "))
+            match select:
+                case 1:
+                    modulos.consultas.criar_consulta(lista_consultas)
+                case 2:
+                    modulos.consultas.ler_consultas(lista_consultas)
+                case 3:
+                    modulos.consultas.ler_uma_consulta(lista_consultas)
+                case 4:
+                    modulos.consultas.deletar_consulta(lista_consultas)
+                case 5:
+                    modulos.consultas.atualizar_consulta(lista_consultas)
+                case 6:
+                    break
+        except ValueError:
+            print("Opção inválida")
+
 
 def exibir_menu_pacientes():
     while True:
@@ -65,21 +69,24 @@ def exibir_menu_pacientes():
                     "Remover Paciente",
                     "Atualizar Paciente",
                     "Voltar"])
-        select = int(input("Selecione uma opção: "))
-        match select:
-            case 1:
-                modulos.pacientes.ler_pacientes(lista_pacientes)
-            case 2:
-                modulos.pacientes.criar_paciente(lista_pacientes)
-            case 3:
-                modulos.pacientes.ler_um_paciente(lista_pacientes)
-            case 4:
-                modulos.pacientes.deletar_paciente(lista_pacientes)
-            case 5:
-                modulos.pacientes.atualizar_paciente(lista_pacientes)
-            case 6:
-                break
-    
+        try:
+            select = int(input("Selecione uma opção: "))
+            match select:
+                case 1:
+                    modulos.pacientes.ler_pacientes(lista_pacientes)
+                case 2:
+                    modulos.pacientes.criar_paciente(lista_pacientes)
+                case 3:
+                    modulos.pacientes.ler_um_paciente(lista_pacientes)
+                case 4:
+                    modulos.pacientes.deletar_paciente(lista_pacientes)
+                case 5:
+                    modulos.pacientes.atualizar_paciente(lista_pacientes)
+                case 6:
+                    break
+        except ValueError:
+            print("Opção inválida")
+
 def exibir_menu_profissionais():
     while True:
         print_header("PROFISSIOANIS")
@@ -89,20 +96,23 @@ def exibir_menu_profissionais():
                     "Remover Profissional",
                     "Atualizar Profissional",
                     "Voltar"])
-        select = int(input("Selecione uma opção: "))
-        match select:
-            case 1:
-                modulos.profissionais.ler_profissionais(lista_profissionais)
-            case 2:
-                modulos.profissionais.criar_profissional(lista_profissionais)
-            case 3:
-                modulos.profissionais.ler_um_profissional(lista_profissionais)
-            case 4:
-                modulos.profissionais.deletar_profissional(lista_profissionais)
-            case 5:
-                modulos.profissionais.atualizar_profissional(lista_profissionais)
-            case 6:
-                break
+        try:
+            select = int(input("Selecione uma opção: "))
+            match select:
+                case 1:
+                    modulos.profissionais.ler_profissionais(lista_profissionais)
+                case 2:
+                    modulos.profissionais.criar_profissional(lista_profissionais)
+                case 3:
+                    modulos.profissionais.ler_um_profissional(lista_profissionais)
+                case 4:
+                    modulos.profissionais.deletar_profissional(lista_profissionais)
+                case 5:
+                    modulos.profissionais.atualizar_profissional(lista_profissionais)
+                case 6:
+                    break
+        except ValueError:
+            print("Opção inválida")
 
 def print_header(message: str):
     caractere = "="

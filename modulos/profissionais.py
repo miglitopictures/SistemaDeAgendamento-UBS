@@ -169,7 +169,6 @@ def atualizar_profissional(profissionais: list):
                 while True:
                     
                     novo_rqe = input(f"Novo RQE [{profissional.get('rqe')}]: ").strip()
-                    # or resultado.get('rqe')
                     
                     if not novo_rqe:
                         print("RQE removido (ou mantido vazio).\n")

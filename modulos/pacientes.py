@@ -1,5 +1,5 @@
 from .arquivos import *
-from .utils import is_cpf, buscar_por_valor
+from .utils import is_cpf, is_date, buscar_por_valor
 
 # --- CRUD Pacientes ---
 def criar_paciente(pacientes):
@@ -9,7 +9,6 @@ def criar_paciente(pacientes):
     while True:
         cpf = input('CPF: ')
 
-        #validação de 11 dígitos e se é numérico
         if not is_cpf(cpf):
             print(f'⚠️ Erro: CPF inválido ou vazio. Tente novamente.')
             continue
@@ -21,9 +20,22 @@ def criar_paciente(pacientes):
         else:
             break
 
-    # infos básicas
-    nome = input("Nome do paciente: ")
-    nascimento = input('Data de nascimento (DD/MM/AAAA): ')
+    while True:
+        nome = input("Nome completo: ")
+        if not nome:
+            print("Nome não pode ser vazio.\n")
+            continue
+        else:
+            print(f"Nome '{nome}' registrado.\n")
+            break   
+
+    while True:
+        nascimento = input('Data de nascimento (DD/MM/AAAA): ')
+        if not is_date(nascimento):
+            print("⚠️ Data invalida ou vazia.")
+            continue
+        break
+
     convenio = input('Convênio: ')
     
     # validar status da vacina
@@ -58,17 +70,16 @@ def ler_um_paciente(pacientes):
     O parâmetro 'pacientes' deve ser uma lista de dicionários.
     Retorna o dicionário do paciente encontrado ou None.'''
 
-    
+    while True:
+        cpf = input('Digite o CPF do paciente para buscar: ')
 
-    cpf = input('Digite o CPF do paciente para buscar: ')
-
-    if not is_cpf(cpf):
-        print(f'⚠️ Erro: CPF inválido ou vazio. Tente novamente.')
+        if not is_cpf(cpf):
+            print(f'⚠️ Erro: CPF inválido ou vazio. Tente novamente.')
+            continue
+        break
         
     paciente_encontrado = buscar_por_valor(cpf, "cpf", pacientes)
 
-
-    # Exibe os dados do paciente encontado
     if paciente_encontrado:
         print("\n--- ✅ PACIENTE ENCONTRADO ---")
         print(f"🔑 CPF:            {paciente_encontrado.get('cpf', 'N/A')}")
@@ -91,21 +102,6 @@ def ler_pacientes(pacientes):
         print(f"CPF: {p['cpf']} | {p['nome']} - Nasc.: {p['data_de_nascimento']} - Vacinas: {p['vacinas']} - Convênio: {p['convenio']}")
     print()
 
-# def ver_paciente(pacientes):
-#     if not pacientes:
-#         print("Nenhum paciente cadastrado.\n")
-#         return
-#     cpf_busca = input("Digite o CPF do paciente: ")
-#     for p in pacientes:
-#         if p["cpf"] == cpf_busca:
-#             print("\n Detalhes do Paciente:")
-#             print(f"Nome: {p['nome']}")
-#             print(f"CPF: {p['cpf']}")
-#             print(f"Data de nascimento: {p['data_de_nascimento']}")
-#             print(f"Vacinas: {p['vacinas']}")
-#             print(f"Convênio: {p['convenio']}\n")
-#             return
-#     print("Paciente não encontrado.\n")
 
 def deletar_paciente(pacientes):
     ler_pacientes(pacientes)

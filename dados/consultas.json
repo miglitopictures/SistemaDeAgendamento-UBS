@@ -9,15 +9,6 @@
         "crm_profissional": "544785/PE"
     },
     {
-        "id": 3,
-        "data": "27/10/2025",
-        "horario": "11:30",
-        "paciente": "CARLOS SILVA",
-        "cpf_paciente": "117.242.563-02",
-        "profissional": "GUILHERME PEDRO TAMBORINI",
-        "crm_profissional": "544785/PE"
-    },
-    {
         "id": 4,
         "data": "30/10/2025",
         "horario": "12:00",
@@ -59,7 +50,7 @@
         "horario": "12:30",
         "paciente": "ANA SOUZA",
         "cpf_paciente": "228.353.674-13",
-        "profissional": "MIGUEL \u0001KATHLYN GIACOMINNI",
+        "profissional": "MIGUEL KATHLYN GIACOMINNI",
         "crm_profissional": "234567/PE"
     }
 ]

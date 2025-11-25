@@ -3,12 +3,11 @@
         "nome": "GUILHERME PABLO TAMBORINI",
         "cpf": "168.113.276-55",
         "crm": "544785/PE",
-        "rqe": "",
+        "rqe": null,
         "especialidade": [
             "Clinica Geral",
             "Endocrinologia"
-        ],
-        "rque": ""
+        ]
     },
     {
         "nome": "SANDRA CRISTINA MOTTA",
@@ -27,7 +26,7 @@
         ]
     },
     {
-        "nome": "MIGUEL \u0001KATHLYN GIACOMINNI",
+        "nome": "MIGUEL KATHLYN GIACOMINNI",
         "cpf": "123.123.123-23",
         "crm": "234567/PE",
         "rqe": null,
