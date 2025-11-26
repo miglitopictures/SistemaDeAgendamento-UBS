@@ -1,6 +1,8 @@
 from .arquivos import *
 from .utils import is_cpf, is_crm, is_date, is_time, buscar_por_valor
 
+DURACAO_CONSULTA = 60
+
 def criar_consulta(consultas: list):
     lista_pacientes = carregar_dados(PACIENTES_PATH)
     lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
@@ -39,21 +41,36 @@ def criar_consulta(consultas: list):
             print(f"ℹ️ Profissional {crm_profissional} não cadastrado.")
 
     while True:
-        data = input("Data (DD/MM/AAAA): ")
+
+        while True:
+            data = input("Data (DD/MM/AAAA): ")
+            
+            if not is_date(data):
+                print("⚠️ Data invalida ou vazio.")
+                continue
+
+            break
+
+        while True:
+            horario = input("Horário (HH:MM): ")
+            if not is_time(horario):
+                print("⚠️ Horário invalido ou vazio.")
+                continue
+
+            break
+
+        disponibilidade_profissional = checar_disponibilidade(crm_profissional, "crm_profissional", data, horario, consultas)
+        disponibilidade_paciente = checar_disponibilidade(cpf_paciente, "cpf_paciente", data, horario, consultas)
+
+        if not disponibilidade_profissional:
+            print("⚠️ Horario indisponivel para profissional selecionado")
+            continue
+        if not disponibilidade_paciente:
+            print("⚠️ Horario indisponivel para paciente selecionado")
+            continue
         
-        if not is_date(data):
-            print("⚠️ Data invalida ou vazio.")
-            continue
-
         break
-
-    while True:
-        horario = input("Horário (HH:MM): ")
-        if not is_time(horario):
-            print("⚠️ Horário invalido ou vazio.")
-            continue
-
-        break
+        
 
     consulta = {
         "id": max((consulta["id"] for consulta in consultas), default=0) + 1,
@@ -210,3 +227,22 @@ def deletar_consulta(consultas: list):
         print(f" Consulta ID {id_selecionada} ({consulta_removida['paciente']} em {consulta_removida['data']}) deletada com sucesso!\n")
     else:
         print(f"ℹ️ Consulta com ID {id_selecionada} não encontrada.\n")
+
+
+def checar_disponibilidade(valor, chave, data, horario, lista):
+    partes_horario_desejado = horario.split(":") # "11:30"
+    # ["11","30"]
+    hora = int(partes_horario_desejado[0])
+    horario_desejado_em_minutos = int(partes_horario_desejado[1]) + hora * 60
+    for consulta in lista:
+        if consulta[chave] == valor and consulta["data"] == data:
+            partes_consulta_horario = consulta["horario"].split(":")
+            consulta_hora = int(partes_consulta_horario[0])
+            consulta_horario_em_minutos = int(partes_consulta_horario[1]) + consulta_hora * 60
+
+            if horario_desejado_em_minutos > (consulta_horario_em_minutos + DURACAO_CONSULTA) or \
+            horario_desejado_em_minutos < (consulta_horario_em_minutos - DURACAO_CONSULTA):
+                pass
+            else:
+                return False
+    return True
