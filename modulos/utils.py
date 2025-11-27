@@ -1,38 +1,53 @@
-ESTADOS_BR = [
+# CONTANTES #
+
+ESTADOS_BR = [ # lista com siglas dos estados brasileiros, para validar o CRM.
         "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA",
         "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN",
-        "RS", "RO", "RR", "SC", "SP", "SE", "TO"
-    ]
+        "RS", "RO", "RR", "SC", "SP", "SE", "TO"] 
 
 
+
+# FUNCOES #
 
 def is_cpf(cpf: str) -> bool:
     '''Verifica a formatacao CPF do string de entrada. (xxx.xxx.xxx-xx)'''
 
+    # tira espacos denecessarios do inicio e final do input. "  123" vira "123".
+    cpf = cpf.strip()
+
+    # checa se, contando pontos e hifem, temos 14 caracteres.
     if len(cpf) != 14:
         return False
-    digitos_cpf = cpf.strip().replace(".", "").replace("-", "")
+    
+    # tirando pontos e hifem
+    digitos_cpf = cpf.replace(".", "").replace("-", "")
+
+    # checa se o que sobrou são digitos numericos
     if not digitos_cpf.isdigit():
-        return False
+        return False # se sim, retorna verdadeiro
     else:
-        return True
+        return True # se nao, falso
 
 
 
 def is_crm(crm: str) -> bool:
     '''Verifica a formatacao CRM do string de entrada. (xxxxx/UF)'''
+    # divide em partes
     partes = crm.split('/')
 
+    # checa se nao tem duas partes
     if len(partes) != 2:
         return False
 
+    # guarda as partes em variaveis
     digitos_crm = partes[0]
     estado_crm = partes[1]
 
+    # checa se o estado existe (PE, RJ, MG), e se os digitos sao numericos
     if (estado_crm in ESTADOS_BR) and (digitos_crm.isdigit()):
-        return True
+        return True # se sim, retorna verdadeiro
     else:
-        return False
+        return False # se nao falso
 
 
 
@@ -110,31 +125,40 @@ def is_time(t: str) -> bool:
 
 def is_rqe(rqe: str, crm: str) -> bool:
     '''Verifica a formatacao e validade do RQE do string de entrada. (HH:MM)'''
+
+    # divide em partes do RQE
     partes = rqe.split('-')
 
+    # checa se RQE não tem 2 partes.
     if len(partes) != 2:
         return False
 
+    # guarda as partes do RQE em variaveis
     parte_inicial = partes[0]
     parte_final = partes[1]
 
+    # guarda os primeiros quatro digitos do CRM.
     quatro_primeiros_crm = crm.split('/')[0][:4]
 
     if (
-        parte_inicial.isdigit()
-        and parte_final.isdigit()
-        and len(parte_inicial) == 4
-        and len(parte_final) == 3
-        and parte_inicial == quatro_primeiros_crm
+        parte_inicial.isdigit()     # se parte inicial do RQE do for digito,
+        and parte_final.isdigit()   # e a parte final do RQE for digito,
+        and len(parte_inicial) == 4 # e se a parte inicial do RQE tiver 4 digitos,
+        and len(parte_final) == 3   # e se a parte final do RQE tiver 3 digitos,
+        and parte_inicial == quatro_primeiros_crm # e se a parte inicial do RQE for igual aos primeiros 4 digitos do CRM.
     ):
-        return True
-    return False
+        return True # rqe valido
+    return False #rqe invalido
 
 
 
 def buscar_por_valor(valor, chave, lista: list):
     '''Retorna o primeiro objeto dentro da lista com o valor e a chave especificada no input.'''
+
+    # faz um loop em todos os itens da lista
     for item in lista:
+        # se o item tem, associado a chave especificada, o valor especificado.
         if item[chave] == valor:
-            return item
-    return None
+            return item # retorna o item
+
+    return None # se chegar ate aqui depois de varrer a lista, retornar None

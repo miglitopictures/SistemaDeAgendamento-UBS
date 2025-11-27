@@ -1,19 +1,53 @@
-import json
-import os
+import json # Módulo nativo do Python para codificar e decodificar dados JSON.
+from os import path # Módulo nativo usado para interagir com o sistema, "path" especificamente para manipular caminhos (paths).
 
-ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..')) # talvez usar get realpath
-PACIENTES_PATH = os.path.join(ROOT_DIR, "dados", "pacientes.json")
-PROFISSIONAIS_PATH = os.path.join(ROOT_DIR, "dados", "profissionais.json")
-CONSULTAS_PATH = os.path.join(ROOT_DIR, "dados", "consultas.json")
+## 1. Primeiro precisamos pegar o diretorio base do projeto. ##
+# para isso, pegamos o diretorio do arquivo em que estamos
+_DIRETORIO_MODULOS_PATH_RELATIVO = path.dirname(__file__)
+# > /modulos
+
+# obs.: "__file__" é uma variavel conriga do python que referencia o arquivo atual.
+
+# depois, para pegar o caminho relativo da pasta base do projeto
+# vamos utilizar o /.., que volta um diretorio para tras.
+_DIRETORIO_BASE_PATH_RELATIVO = path.join(_DIRETORIO_MODULOS_PATH_RELATIVO, '..')
+# > /modulos/..
+
+# Enfim, temos o path ABSOLUTO da pasta base do projeto.
+ROOT_DIR = path.abspath(_DIRETORIO_BASE_PATH_RELATIVO)
+
+
+## 2, Depois podemos pegar o path para cada JSON ##
+PACIENTES_PATH = path.join(ROOT_DIR, "dados", "pacientes.json")
+PROFISSIONAIS_PATH = path.join(ROOT_DIR, "dados", "profissionais.json")
+CONSULTAS_PATH = path.join(ROOT_DIR, "dados", "consultas.json")
+
+
+
+# FUNCOES #
 
 def carregar_dados(arquivo_json):
     """Carrega os dados do arquivo JSON ou cria um novo se não existir."""
-    if os.path.exists(arquivo_json):
-        with open(arquivo_json, "r", encoding="utf-8") as f:
+    # Verifica se o arquivo existe antes de tentar abri-lo.
+    if path.exists(arquivo_json):
+        # Abre o arquivo no modo de leitura ('r') com a codificação correta ('utf-8').
+        with open(arquivo_json, "r", encoding="utf-8") as f: # usa 'f' como pseudonimo
+            # lê o conteúdo do arquivo e o converte de JSON para Python.
             return json.load(f)
-    return []
+    
+    return [] # Se o arquivo não existir, retorna uma lista vazia.
+
 
 def salvar_dados(dados, arquivo_json):
     """Salva os dados no arquivo JSON."""
-    with open(arquivo_json, "w", encoding="utf-8") as f:
+    # Abre o arquivo no modo de escrita ('w'). 
+    # O modo 'w' cria o arquivo se não existir ou apaga o conteúdo existente se já existir.
+    with open(arquivo_json, "w", encoding="utf-8") as f: # usa 'f' como pseudonimo
+
+        # transforma o objeto Python ('dados') para o formato JSON e o grava no arquivo.
         json.dump(dados, f, indent=4, ensure_ascii=False)
+
+        # Parâmetros adicionais para formatação:
+        # 1. indent=4: Formata o JSON com 4 espaços de indentação, tornando-o legível por humanos.
+        # 2. ensure_ascii=False: Garante que caracteres especiais (como acentos) sejam 
+        #    salvos como são, sem usar sequências de escape \uXXXX.
