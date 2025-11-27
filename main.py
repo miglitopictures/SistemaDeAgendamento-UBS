@@ -27,6 +27,8 @@ def exibir_menu():
                 case 4:
                     print("\n\n- Obrigado!\n\n")
                     break
+                case _:
+                    print("Opção inválida")
         except ValueError:
             print("Opção inválida")
 
@@ -40,6 +42,7 @@ def exibir_menu_consultas():
                     "Ver Consulta",
                     "Cancelar Consulta",
                     "Atualizar Consulta",
+                    "Relatórios",
                     "Voltar"])
         try:
             select = int(input("Selecione uma opção: "))
@@ -55,7 +58,11 @@ def exibir_menu_consultas():
                 case 5:
                     modulos.consultas.atualizar_consulta(lista_consultas)
                 case 6:
+                    exibir_menu_relatorios()
+                case 7:
                     break
+                case _:
+                    print("Opção inválida")
         except ValueError:
             print("Opção inválida")
 
@@ -84,6 +91,8 @@ def exibir_menu_pacientes():
                     modulos.pacientes.atualizar_paciente(lista_pacientes)
                 case 6:
                     break
+                case _:
+                    print("Opção inválida")
         except ValueError:
             print("Opção inválida")
 
@@ -111,6 +120,28 @@ def exibir_menu_profissionais():
                     modulos.profissionais.atualizar_profissional(lista_profissionais)
                 case 6:
                     break
+                case _:
+                    print("Opção inválida")
+        except ValueError:
+            print("Opção inválida")
+
+def exibir_menu_relatorios():
+    while True:
+        print_header("RELATORIO DE CONSULTAS")
+        print_list(["Consultas por Profissional",
+                    "Consultas por Data",
+                    "Voltar"])
+        try:
+            select = int(input("Selecione uma opção: "))
+            match select:
+                case 1:
+                    modulos.consultas.consultas_por_profissional(lista_consultas)
+                case 2:
+                    modulos.consultas.consultas_por_data(lista_consultas)
+                case 3:
+                    break
+                case _:
+                    print("Opção inválida")
         except ValueError:
             print("Opção inválida")
 

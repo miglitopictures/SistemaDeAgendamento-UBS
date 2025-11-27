@@ -1,5 +1,6 @@
 from .arquivos import *
-from .utils import is_cpf, is_crm, is_date, is_time, buscar_por_valor
+from .utils import is_cpf, is_crm, is_date, is_time, buscar_por_valor, format_date
+from .profissionais import ler_profissionais
 
 DURACAO_CONSULTA = 60
 
@@ -48,6 +49,8 @@ def criar_consulta(consultas: list):
             if not is_date(data):
                 print("⚠️ Data invalida ou vazio.")
                 continue
+
+            data = format_date(data)
 
             break
 
@@ -146,6 +149,8 @@ def atualizar_consulta(consultas: list):
                 print("⚠️ Data invalida.")
                 continue
 
+            nova_data = format_date(nova_data)
+
             consulta["data"] = nova_data
             break
 
@@ -228,21 +233,90 @@ def deletar_consulta(consultas: list):
     else:
         print(f"ℹ️ Consulta com ID {id_selecionada} não encontrada.\n")
 
+def consultas_por_profissional(consultas):
+    lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
+    ler_profissionais(lista_profissionais)
 
-def checar_disponibilidade(valor, chave, data, horario, lista):
-    partes_horario_desejado = horario.split(":") # "11:30"
-    # ["11","30"]
-    hora = int(partes_horario_desejado[0])
-    horario_desejado_em_minutos = int(partes_horario_desejado[1]) + hora * 60
-    for consulta in lista:
-        if consulta[chave] == valor and consulta["data"] == data:
-            partes_consulta_horario = consulta["horario"].split(":")
-            consulta_hora = int(partes_consulta_horario[0])
-            consulta_horario_em_minutos = int(partes_consulta_horario[1]) + consulta_hora * 60
+    while True:
+        crm_profissional_selecionado = input("Digite o CRM do profissional: ")
 
-            if horario_desejado_em_minutos > (consulta_horario_em_minutos + DURACAO_CONSULTA) or \
-            horario_desejado_em_minutos < (consulta_horario_em_minutos - DURACAO_CONSULTA):
+        if not is_crm(crm_profissional_selecionado):
+            print("CRM invalido ou vazio.")
+            continue
+
+        profissional_selecionado = buscar_por_valor(crm_profissional_selecionado, "crm", lista_profissionais)
+
+        if not profissional_selecionado:
+            print("CRM não cadastrado.")
+            continue
+        
+        print(f"\n====== Consultas {profissional_selecionado["nome"]} {profissional_selecionado["crm"]} =====")
+
+        consultas_encontradas = False
+
+        for consulta in consultas:
+            if consulta["crm_profissional"] == crm_profissional_selecionado:
+                consultas_encontradas = True
+                print(f"{consulta['id']} - {consulta['data']} {consulta['horario']} | Paciente: {consulta['paciente']}")
+        
+        if not consultas_encontradas:
+            print("*Nenhuma consulta cadastrada.")
+
+        print()
+        break
+
+def consultas_por_data(consultas):
+    while True:
+        data_selecionada = input("Digite a data (DD/MM/AAAA): ")
+
+        if not is_date(data_selecionada):
+            print("Data invalida ou vazia.")
+            continue
+
+        data_selecionada = format_date(data_selecionada)
+
+        print(f"\n====== Consultas {data_selecionada} =====")
+
+        consultas_encontradas = False
+
+        for consulta in consultas:
+            if consulta["data"] == data_selecionada:
+                consultas_encontradas = True
+                print(f"{consulta['id']} - {consulta['data']} {consulta['horario']} | Paciente: {consulta['paciente']} | Profissional: {consulta['profissional']}")
+        
+        if not consultas_encontradas:
+            print("*Nenhuma consulta cadastrada.")
+
+        print()
+        break
+
+
+def checar_disponibilidade(valor: str, chave: str, data: str, horario: str, lista: list):
+
+    horario_desejado_em_minutos = horario_em_minutos(horario)
+
+    # 
+    for consulta_existente in lista:
+        if consulta_existente[chave] == valor and consulta_existente["data"] == data:
+            consulta_horario_em_minutos = horario_em_minutos(consulta_existente["horario"])
+
+            if horario_desejado_em_minutos >= (consulta_horario_em_minutos + DURACAO_CONSULTA) or \
+            horario_desejado_em_minutos <= (consulta_horario_em_minutos - DURACAO_CONSULTA):
                 pass
             else:
                 return False
+    
     return True
+
+def horario_em_minutos(horario: str) -> int:
+    '''Transforma uma string no formato de horario (HH:MM) no valor absoluto em minutos. Ex.: "10:30" vira 630 (int)'''
+    # divide o horario em duas partes
+    partes_horario = horario.split(":") # "11:30"
+    # ["11","30"]
+
+    # transforma a hora em INT, nao precisa validar pois ja estamos validando com utils.is_time()
+    hora = int(partes_horario[0])
+    minutos = int(partes_horario[1])
+
+    # retorna horario em minutos
+    return minutos + hora * 60

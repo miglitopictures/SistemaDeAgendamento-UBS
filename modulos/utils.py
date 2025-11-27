@@ -55,8 +55,15 @@ def is_date(date: str) -> bool:
         return False
     return True
 
-def is_time(t: str) -> bool:
+def format_date(date: str) -> str:
+    partes = date.split('/')
+    dia = int(partes[0])
+    mes = int(partes[1])
+    ano = int(partes[2])
+    return f"{dia}/{mes}/{ano}"
 
+def is_time(t: str) -> bool:
+    '''Verifica a formatacao de horario do string de entrada. (HH:MM)'''
     partes = t.split(':')
 
     if len(partes) != 2:
@@ -74,7 +81,7 @@ def is_time(t: str) -> bool:
     
 
 def is_rqe(rqe: str, crm: str) -> bool:
-    
+    '''Verifica a formatacao e validade do RQE do string de entrada. (HH:MM)'''
     partes = rqe.split('-')
 
     if len(partes) != 2:
@@ -98,7 +105,7 @@ def is_rqe(rqe: str, crm: str) -> bool:
 
 
 def buscar_por_valor(valor, chave, lista: list):
-    '''Retorna o primeiro objeto dentro da lista, com o valor e a chave especificada no input.'''
+    '''Retorna o primeiro objeto dentro da lista com o valor e a chave especificada no input.'''
     for item in lista:
         if item[chave] == valor:
             return item
