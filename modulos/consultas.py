@@ -2,7 +2,7 @@ from .arquivos import *
 from .utils import is_cpf, is_crm, is_date, is_time, buscar_por_valor, format_date
 from .profissionais import ler_profissionais
 
-DURACAO_CONSULTA = 60
+DURACAO_CONSULTA = 60 # em minutos
 
 def criar_consulta(consultas: list):
     lista_pacientes = carregar_dados(PACIENTES_PATH)
@@ -90,6 +90,7 @@ def criar_consulta(consultas: list):
     print("Consulta adicionada com sucesso!\n")
 
 
+
 def ler_consultas(consultas: list):
     if not consultas:
         print("ℹ️ Nenhuma consulta cadastrada.\n")
@@ -99,6 +100,7 @@ def ler_consultas(consultas: list):
     for consulta in consultas:
         print(f"{consulta['id']} - {consulta['data']} {consulta['horario']} | Paciente: {consulta['paciente']} | Profissional: {consulta['profissional']}")
     print()
+
 
 
 def ler_uma_consulta(consultas: list):
@@ -122,6 +124,7 @@ def ler_uma_consulta(consultas: list):
         print()
     else:
         print(f"ℹ️ Consulta com ID {id_selecionada} não encontrada.\n")
+
 
 
 def atualizar_consulta(consultas: list):
@@ -211,6 +214,7 @@ def atualizar_consulta(consultas: list):
         print("ℹ️ Id da consulta não encontrada")
 
 
+
 def deletar_consulta(consultas: list):
     ler_consultas(consultas)
 
@@ -232,6 +236,8 @@ def deletar_consulta(consultas: list):
         print(f" Consulta ID {id_selecionada} ({consulta_removida['paciente']} em {consulta_removida['data']}) deletada com sucesso!\n")
     else:
         print(f"ℹ️ Consulta com ID {id_selecionada} não encontrada.\n")
+
+
 
 def consultas_por_profissional(consultas):
     lista_profissionais = carregar_dados(PROFISSIONAIS_PATH)
@@ -265,6 +271,8 @@ def consultas_por_profissional(consultas):
         print()
         break
 
+
+
 def consultas_por_data(consultas):
     while True:
         data_selecionada = input("Digite a data (DD/MM/AAAA): ")
@@ -291,30 +299,45 @@ def consultas_por_data(consultas):
         break
 
 
-def checar_disponibilidade(valor: str, chave: str, data: str, horario: str, lista: list):
 
+def checar_disponibilidade(valor: str, chave: str, data: str, horario: str, consultas: list) -> bool:
+    '''Checa se a pessoa (profissional, paciente) tem disponibilidade na data e hora indicadas'''
+    
+    # transforma o horario inputado em um horario absoluto em minutos. Ex.: "10:30" vira 630
+    # isso é feito para simplificar a comparacao dos horarios, por incrivel que pareça
     horario_desejado_em_minutos = horario_em_minutos(horario)
 
-    # 
-    for consulta_existente in lista:
+    # faz um loop em todas as consultas
+    for consulta_existente in consultas:
+
+        # para cada consulta, checamos a pessoa (paciente ou profissional) é equivalente a pessoa indicada (valor)
+        # e se a data equivale a data indicada
         if consulta_existente[chave] == valor and consulta_existente["data"] == data:
+
+            # transforma o horario da consulta marcada em um horario absoluto em minutos.
             consulta_horario_em_minutos = horario_em_minutos(consulta_existente["horario"])
 
+            # se a consulta que queremos marcar começar mais de uma hora depois da consulta já marcada
+            # ou se começar mais de uma hora antes, ok! (pass)
             if horario_desejado_em_minutos >= (consulta_horario_em_minutos + DURACAO_CONSULTA) or \
             horario_desejado_em_minutos <= (consulta_horario_em_minutos - DURACAO_CONSULTA):
                 pass
             else:
+                # senao, não temos disponibilidade
                 return False
     
+    # depois de varrer todas as consultas procurando conflitos, se chegamos até aqui, temos disponibilidade (return true)
     return True
 
-def horario_em_minutos(horario: str) -> int:
-    '''Transforma uma string no formato de horario (HH:MM) no valor absoluto em minutos. Ex.: "10:30" vira 630 (int)'''
-    # divide o horario em duas partes
-    partes_horario = horario.split(":") # "11:30"
-    # ["11","30"]
 
-    # transforma a hora em INT, nao precisa validar pois ja estamos validando com utils.is_time()
+
+def horario_em_minutos(horario: str) -> int:
+    '''Transforma uma string no formato de horario (HH:MM) no valor absoluto em minutos. Ex.: "10:30" vira 630'''
+    
+    partes_horario = horario.split(":") # divide o horario em duas partes
+                                        # o string "11:30" vira a lista ["11","30"]
+
+    # transforma a hora em numero inteiro
     hora = int(partes_horario[0])
     minutos = int(partes_horario[1])
 
