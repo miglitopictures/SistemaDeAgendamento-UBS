@@ -149,16 +149,3 @@ def is_rqe(rqe: str, crm: str) -> bool:
     ):
         return True # rqe valido
     return False #rqe invalido
-
-
-
-def buscar_por_valor(valor, chave, lista: list):
-    '''Retorna o primeiro objeto dentro da lista com o valor e a chave especificada no input.'''
-
-    # faz um loop em todos os itens da lista
-    for item in lista:
-        # se o item tem, associado a chave especificada, o valor especificado.
-        if item[chave] == valor:
-            return item # retorna o item
-
-    return None # se chegar ate aqui depois de varrer a lista, retornar None

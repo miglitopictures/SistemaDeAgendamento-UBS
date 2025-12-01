@@ -1,23 +1,27 @@
 import json # Módulo nativo do Python para codificar e decodificar dados JSON.
 from os import path # Módulo nativo usado para interagir com o sistema, "path" especificamente para manipular caminhos (paths).
 
-## 1. Primeiro precisamos pegar o diretorio base do projeto. ##
-# para isso, pegamos o diretorio do arquivo em que estamos
+'''Este módulo lida com o armazenamento e carregamento de dados nos arquivos JSON.'''
+
+
+# CONSTANTES #
+    #1. Primeiro precisamos pegar o diretorio base do projeto.
+
+# 1.1 para isso, pegamos o diretorio do arquivo em que estamos
 _DIRETORIO_MODULOS_PATH_RELATIVO = path.dirname(__file__)
 # > /modulos
-
 # obs.: "__file__" é uma variavel conriga do python que referencia o arquivo atual.
 
-# depois, para pegar o caminho relativo da pasta base do projeto
+# 1.2 depois, para pegar o caminho relativo da pasta base do projeto
 # vamos utilizar o /.., que volta um diretorio para tras.
 _DIRETORIO_BASE_PATH_RELATIVO = path.join(_DIRETORIO_MODULOS_PATH_RELATIVO, '..')
 # > /modulos/..
 
-# Enfim, temos o path ABSOLUTO da pasta base do projeto.
+# 1.3 Enfim, temos o path ABSOLUTO da pasta base do projeto.
 ROOT_DIR = path.abspath(_DIRETORIO_BASE_PATH_RELATIVO)
 
 
-## 2, Depois podemos pegar o path para cada JSON ##
+    ## 2, Depois podemos pegar o path para cada JSON ##
 PACIENTES_PATH = path.join(ROOT_DIR, "dados", "pacientes.json")
 PROFISSIONAIS_PATH = path.join(ROOT_DIR, "dados", "profissionais.json")
 CONSULTAS_PATH = path.join(ROOT_DIR, "dados", "consultas.json")
@@ -51,3 +55,15 @@ def salvar_dados(dados, arquivo_json):
         # 1. indent=4: Formata o JSON com 4 espaços de indentação, tornando-o legível por humanos.
         # 2. ensure_ascii=False: Garante que caracteres especiais (como acentos) sejam 
         #    salvos como são, sem usar sequências de escape \uXXXX.
+
+
+def buscar_por_valor(valor, chave, lista: list):
+    '''Retorna o primeiro objeto dentro da lista com o valor e a chave especificada no input.'''
+
+    # faz um loop em todos os itens da lista
+    for item in lista:
+        # se o item tem, associado a chave especificada, o valor especificado.
+        if item[chave] == valor:
+            return item # retorna o item
+
+    return None # se chegar ate aqui depois de varrer a lista, retornar None
