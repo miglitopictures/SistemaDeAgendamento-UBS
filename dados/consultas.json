@@ -28,12 +28,12 @@
     },
     {
         "id": 6,
-        "data": "12/12/2012",
-        "horario": "12:12",
+        "data": "31/10/2025",
+        "horario": "10:00",
         "paciente": "ANA SOUZA",
         "cpf_paciente": "228.353.674-13",
         "profissional": "VICTORIA FALCAO",
-        "crm_profissional": "888723/PE"
+        "crm_profissional": ""
     },
     {
         "id": 7,
@@ -79,15 +79,6 @@
         "cpf_paciente": "111.111.111-11",
         "profissional": "Vics Bics Nics",
         "crm_profissional": "000111/PR"
-    },
-    {
-        "id": 12,
-        "data": "10/4/2026",
-        "horario": "22:00",
-        "paciente": "Glauberson",
-        "cpf_paciente": "555.555.555-55",
-        "profissional": "VICTORIA FALCAO",
-        "crm_profissional": ""
     },
     {
         "id": 13,

@@ -207,11 +207,14 @@ def atualizar_consulta(consultas: list):
 
             # validando disponibilidade de horario
             disponibilidade_novo_profissional = checar_disponibilidade(novo_crm, "crm_profissional", nova_data, novo_horario, consultas)
+            disponibilidade_novo_paciente = checar_disponibilidade(consulta["cpf_paciente"], "cpf_paciente", nova_data, novo_horario, consultas)
 
             if not disponibilidade_novo_profissional:
                 print("⚠️ Horario indisponivel para profissional selecionado")
                 continue
-            
+            if not disponibilidade_novo_paciente:
+                print(f"⚠️ Horario indisponivel para paciente {consulta["paciente"]}")
+                continue
             break
         
         consulta["crm_profissional"] = novo_crm
