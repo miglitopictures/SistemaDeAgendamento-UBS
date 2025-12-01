@@ -5,27 +5,11 @@ from os import path # Módulo nativo usado para interagir com o sistema, "path" 
 
 
 # CONSTANTES #
-    #1. Primeiro precisamos pegar o diretorio base do projeto.
 
-# 1.1 para isso, pegamos o diretorio do arquivo em que estamos
-_DIRETORIO_MODULOS_PATH_RELATIVO = path.dirname(__file__)
-# > /modulos
-# obs.: "__file__" é uma variavel conriga do python que referencia o arquivo atual.
-
-# 1.2 depois, para pegar o caminho relativo da pasta base do projeto
-# vamos utilizar o /.., que volta um diretorio para tras.
-_DIRETORIO_BASE_PATH_RELATIVO = path.join(_DIRETORIO_MODULOS_PATH_RELATIVO, '..')
-# > /modulos/..
-
-# 1.3 Enfim, temos o path ABSOLUTO da pasta base do projeto.
-ROOT_DIR = path.abspath(_DIRETORIO_BASE_PATH_RELATIVO)
-
-
-    ## 2, Depois podemos pegar o path para cada JSON ##
+ROOT_DIR = path.abspath(path.join(path.dirname(__file__), '..'))
 PACIENTES_PATH = path.join(ROOT_DIR, "dados", "pacientes.json")
 PROFISSIONAIS_PATH = path.join(ROOT_DIR, "dados", "profissionais.json")
 CONSULTAS_PATH = path.join(ROOT_DIR, "dados", "consultas.json")
-
 
 
 # FUNCOES #
