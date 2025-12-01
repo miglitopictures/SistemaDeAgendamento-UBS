@@ -1,5 +1,5 @@
-from .arquivos import *
-from .utils import is_cpf, is_crm, is_date, is_time, buscar_por_valor, format_date
+from .dados import *
+from .validacoes import is_cpf, is_crm, is_date, is_time, format_date
 from .profissionais import ler_profissionais
 
 # CONTANTE #

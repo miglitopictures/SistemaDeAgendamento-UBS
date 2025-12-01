@@ -1,5 +1,5 @@
 import modulos.consultas, modulos.pacientes, modulos.profissionais
-from modulos.arquivos import carregar_dados, CONSULTAS_PATH, PACIENTES_PATH, PROFISSIONAIS_PATH
+from modulos.dados import carregar_dados, CONSULTAS_PATH, PACIENTES_PATH, PROFISSIONAIS_PATH
 
 lista_consultas = carregar_dados(CONSULTAS_PATH)
 lista_pacientes = carregar_dados(PACIENTES_PATH)

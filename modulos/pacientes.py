@@ -1,5 +1,5 @@
-from .arquivos import *
-from .utils import is_cpf, is_date, buscar_por_valor
+from .dados import *
+from .validacoes import is_cpf, is_date
 
 # --- CRUD Pacientes ---
 def criar_paciente(pacientes):
