@@ -37,6 +37,7 @@ def criar_consulta(consultas: list):
             continue
 
         profissional = buscar_por_valor(crm_profissional, "crm", lista_profissionais)
+        
         if profissional:
             nome_profissional = profissional["nome"]
             print(nome_profissional)
@@ -152,39 +153,11 @@ def atualizar_consulta(consultas: list):
     if consulta:
         print(f"Editando Consulta {id_selecionada}")
 
-        # INPUT NOVA DATA
-        while True:
-            nova_data = input("Nova data: ")
-            
-            if not nova_data:
-                break
-
-            if not is_date(nova_data):
-                print("⚠️ Data invalida.")
-                continue
-
-            nova_data = format_date(nova_data)
-
-            consulta["data"] = nova_data
-            break
-        
-        # INPUT NOVO HORARIO
-        while True:
-            novo_horario = input("Novo Horario: ")
-
-            if not novo_horario:
-                break
-
-            if not is_time(novo_horario):
-                print("⚠️ Horario invalido.")
-                continue
-
-            consulta["horario"] = novo_horario
-            break
+        nome_novo_profissional = consulta["profissional"]
         
         # INPUT CRM DO NOVO PROFISSIONAL
         while True:
-            novo_crm = input("CRM do novo profissinal: ")
+            novo_crm = input("CRM do novo profissinal (deixe vazio para manter): ")
 
             if not novo_crm:
                 break
@@ -195,33 +168,56 @@ def atualizar_consulta(consultas: list):
 
             profissional = buscar_por_valor(novo_crm, "crm", lista_profissionais)
             if profissional:
-                consulta["crm_profissional"] = novo_crm
-                consulta["profissional"] = profissional["nome"]
+                nome_novo_profissional = profissional["nome"]
                 print(profissional["nome"])
                 break
             else:
                 print(f"ℹ️ Profissional {novo_crm} não cadastrado.")
-
-        # INPUT CPF DO NOVO PROFISSIONAL
+        
+        
+        # INPUT DATA E HORARIO
         while True:
-            novo_cpf = input("CPF do novo paciente: ")
+            while True:
+                nova_data = input("Nova data (DD/MM/AAAA): ")
 
-            if not novo_cpf:
+                if not nova_data:
+                    nova_data = consulta["data"]
+                    break
+                
+                if not is_date(nova_data):
+                    print("⚠️ Data invalida.")
+                    continue
+
+                nova_data = format_date(nova_data)
+                
                 break
 
-            if not is_cpf(novo_cpf):
-                print("⚠️ CPF invalido ou vazio.")
+            while True:
+                novo_horario = input("Novo horário (HH:MM): ")
+
+                if not novo_horario:
+                    novo_horario = consulta["horario"]
+                    break
+
+                if not is_time(novo_horario):
+                    print("⚠️ Horário invalido.")
+                    continue
+
+                break
+
+            # validando disponibilidade de horario
+            disponibilidade_novo_profissional = checar_disponibilidade(novo_crm, "crm_profissional", nova_data, novo_horario, consultas)
+
+            if not disponibilidade_novo_profissional:
+                print("⚠️ Horario indisponivel para profissional selecionado")
                 continue
-
-            paciente = buscar_por_valor(novo_cpf, "cpf", lista_pacientes)
-            if paciente:
-                consulta["cpf_paciente"] = novo_cpf
-                consulta["paciente"] = paciente["nome"]
-                print(paciente["nome"])
-                break
-            else:
-                print(f"ℹ️ Paciente {novo_cpf} não cadastrado.")
-
+            
+            break
+        
+        consulta["crm_profissional"] = novo_crm
+        consulta["profissional"] = nome_novo_profissional
+        consulta["horario"] = novo_horario
+        consulta["data"] = nova_data
         # salvar lista de consultas atualizada.
         salvar_dados(consultas, CONSULTAS_PATH)
         print("Consulta atualizada!")

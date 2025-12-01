@@ -50,6 +50,34 @@ def is_crm(crm: str) -> bool:
         return False # se nao falso
 
 
+def is_rqe(rqe: str, crm: str) -> bool:
+    '''Verifica a formatacao e validade do RQE do string de entrada. (xxxx-xxx)'''
+
+    # divide em partes do RQE
+    partes = rqe.split('-')
+
+    # checa se RQE não tem 2 partes.
+    if len(partes) != 2:
+        return False
+
+    # guarda as partes do RQE em variaveis
+    parte_inicial = partes[0]
+    parte_final = partes[1]
+
+    # guarda os primeiros quatro digitos do CRM.
+    quatro_primeiros_crm = crm.split('/')[0][:4]
+
+    if (
+        parte_inicial.isdigit()     # se parte inicial do RQE do for digito,
+        and parte_final.isdigit()   # e a parte final do RQE for digito,
+        and len(parte_inicial) == 4 # e se a parte inicial do RQE tiver 4 digitos,
+        and len(parte_final) == 3   # e se a parte final do RQE tiver 3 digitos,
+        and parte_inicial == quatro_primeiros_crm # e se a parte inicial do RQE for igual aos primeiros 4 digitos do CRM.
+    ):
+        return True # rqe valido
+    return False #rqe invalido
+
+
 
 def is_date(date: str) -> bool:
     '''Verifica a formatacao de data do string de entrada. (DD/MM/AAAA)'''
@@ -123,29 +151,3 @@ def is_time(t: str) -> bool:
     
 
 
-def is_rqe(rqe: str, crm: str) -> bool:
-    '''Verifica a formatacao e validade do RQE do string de entrada. (HH:MM)'''
-
-    # divide em partes do RQE
-    partes = rqe.split('-')
-
-    # checa se RQE não tem 2 partes.
-    if len(partes) != 2:
-        return False
-
-    # guarda as partes do RQE em variaveis
-    parte_inicial = partes[0]
-    parte_final = partes[1]
-
-    # guarda os primeiros quatro digitos do CRM.
-    quatro_primeiros_crm = crm.split('/')[0][:4]
-
-    if (
-        parte_inicial.isdigit()     # se parte inicial do RQE do for digito,
-        and parte_final.isdigit()   # e a parte final do RQE for digito,
-        and len(parte_inicial) == 4 # e se a parte inicial do RQE tiver 4 digitos,
-        and len(parte_final) == 3   # e se a parte final do RQE tiver 3 digitos,
-        and parte_inicial == quatro_primeiros_crm # e se a parte inicial do RQE for igual aos primeiros 4 digitos do CRM.
-    ):
-        return True # rqe valido
-    return False #rqe invalido

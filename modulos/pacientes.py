@@ -84,9 +84,9 @@ def ler_um_paciente(pacientes):
         print("\n--- ✅ PACIENTE ENCONTRADO ---")
         print(f"🔑 CPF:            {paciente_encontrado.get('cpf', 'N/A')}")
         print(f"👤 Nome:           {paciente_encontrado.get('nome', 'N/A')}")
-        print(f"🎂 Data Nasc.:     {paciente_encontrado.get('nascimento', 'N/A')}")
+        print(f"🎂 Data Nasc.:     {paciente_encontrado.get('data_de_nascimento', 'N/A')}")
         print(f"🏥 Convênio:       {paciente_encontrado.get('convenio', 'N/A')}")
-        print(f"💉 Status Vacinas: {paciente_encontrado.get('status_vacinas', 'N/A')}")
+        print(f"💉 Status Vacinas: {paciente_encontrado.get('vacinas', 'N/A')}")
         print("-------------------------------")
     else:
         print(f"\n❌ Paciente com CPF '{cpf}' não encontrado na base de dados.")
