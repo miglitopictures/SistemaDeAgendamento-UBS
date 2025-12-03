@@ -1,10 +1,8 @@
 from .dados import *
 from .validacoes import is_cpf, is_date
 
-# --- CRUD Pacientes ---
 def criar_paciente(pacientes):
-    """Cria um novo paciente
-    usando o CPF como chave do dicionario 'pacientes'como identificador único. """
+
     
     while True:
         cpf = input('CPF: ')
@@ -38,7 +36,7 @@ def criar_paciente(pacientes):
 
     convenio = input('Convênio: ')
     
-    # validar status da vacina
+
     while True: 
         vacinas_input = input('As vacinas estão em dia? (Sim/Não): ').strip().lower()
        
@@ -65,10 +63,7 @@ def criar_paciente(pacientes):
 
 
 def ler_um_paciente(pacientes):
-    
-    '''Busca e exibe os dados de um paciente pelo CPF.
-    O parâmetro 'pacientes' deve ser uma lista de dicionários.
-    Retorna o dicionário do paciente encontrado ou None.'''
+
 
     while True:
         cpf = input('Digite o CPF do paciente para buscar: ')
