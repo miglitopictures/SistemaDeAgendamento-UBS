@@ -1,44 +1,60 @@
 [
     {
-        "nome": "GUILHERME PABLO TAMBORINI",
-        "cpf": "168.113.276-55",
-        "crm": "544785/PE",
-        "rqe": null,
+        "nome": "Paulo Ortopé",
+        "cpf": "684.687.951.87",
+        "data_de_nascimento": "17/05/1980",
+        "crm": "123456/PE",
+        "rqe": "1234-666",
         "especialidade": [
-            "Clinica Geral",
-            "Endocrinologia"
+            "Ortopedia"
         ]
     },
     {
-        "nome": "SANDRA CRISTINA MOTTA",
-        "cpf": "984.555.434-09",
-        "crm": "874342/PR",
+        "nome": "Alan Turing Enigmático da Silva",
+        "cpf": "314.159.265-35",
+        "data_de_nascimento": "23/06/1912",
+        "crm": "415263/PE",
+        "rqe": "4152-987",
+        "especialidade": [
+            "Logicologia"
+        ]
+    },
+    {
+        "nome": "Beatriz Lima",
+        "cpf": "875.412.369-32",
+        "data_de_nascimento": "27/09/1998",
+        "crm": "951862/AL",
+        "rqe": "9518-789",
+        "especialidade": [
+            "Ginecologia"
+        ]
+    },
+    {
+        "nome": "Amanda Carvalho",
+        "cpf": "829.672.039-14",
+        "data_de_nascimento": "29/10/1980",
+        "crm": "673198/PB",
+        "rqe": "6731-120",
+        "especialidade": [
+            "Pediatria"
+        ]
+    },
+    {
+        "nome": "Rafael Gomes",
+        "cpf": "256.874.896-53",
+        "data_de_nascimento": "05/05/1985",
+        "crm": "459823/RN",
+        "rqe": "4598-321",
+        "especialidade": [
+            "Nefrologia"
+        ]
+    },
+    {
+        "nome": "Roberto Almeida",
+        "cpf": "528.714.936-41",
+        "data_de_nascimento": "09/0819/1995",
+        "crm": "671389/BA",
         "rqe": null,
         "especialidade": []
-    },
-    {
-        "nome": "VICTORIA FALCAO",
-        "cpf": "449.543.111-09",
-        "crm": "888723/PE",
-        "rqe": "8887-653",
-        "especialidade": [
-            "Psiquiatria"
-        ]
-    },
-    {
-        "nome": "MIGUEL KATHLYN GIACOMINNI",
-        "cpf": "123.123.123-23",
-        "crm": "234567/PE",
-        "rqe": null,
-        "especialidade": []
-    },
-    {
-        "nome": "Vics Bics Nics",
-        "cpf": "123.123.123-65",
-        "crm": "000111/PR",
-        "rqe": "0001-666",
-        "especialidade": [
-            "Anestesia"
-        ]
     }
 ]

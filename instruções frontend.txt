@@ -1,0 +1,45 @@
+Perplexity
+
+Este sistema completo inclui:
+
+Backend Python com Flask - API REST completa
+
+Frontend HTML/CSS/JS atualizado para usar a API
+
+Arquivos JSON como banco de dados
+
+Validações básicas no backend
+
+CORS habilitado para comunicação entre frontend e backend
+
+Sistema completo CRUD para todas as entidades
+
+O frontend corrigido agora permite fechar o modal corretamente, e o backend Python fornece uma API REST completa para o sistema de agendamento de consultas UBS.
+
+
+
+Criar e ativar o ambiente virtual
+No Windows (PowerShell ou CMD), dentro da pasta do projeto:
+
+Criar o ambiente:
+
+
+
+
+
+Sistema-UBS-Flask/
+├── app.py                 
+├── index.htmlrequirements.txt
+├── requirements.txt
+├── README.md
+├── modulos/                
+│   ├── __init__.py         
+│   ├── dados.py            
+│   ├── validacoes.py       
+│   ├── pacientes.py        
+│   ├── profissionais.py    
+│   └── consultas.py        
+├── dados/                  
+│   ├── pacientes.json
+│   ├── profissionais.json
+│   └── consultas.json
